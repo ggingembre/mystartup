@@ -10,7 +10,7 @@
 
 -- ДОПИСАТЬ FOREIGN KEYS, INDEXES, ПРОВЕРИТЬ ДЛИНУ ПЕРЕМЕННЫХ
 
-create table user
+create table if not exists user
 (
   USERNAME varchar(45) not null
     primary key,
@@ -24,14 +24,14 @@ create table user
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-create table user_roles
+create table if not exists user_roles
 (
   USER_USERNAME varchar(45) not null,
   ROLE varchar(45) not null,
   primary key (USER_USERNAME, ROLE)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table contact
+create table if not exists contact
 (
   id bigint auto_increment
     primary key,
