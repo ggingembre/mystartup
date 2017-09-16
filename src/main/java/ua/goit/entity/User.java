@@ -25,6 +25,11 @@ public class User {
     private String youtubeLink;
     private String aboutMe;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<Experience> experiences;
+
+    //    //TODO 6 прописать маппинг
+    //    private Collection<Education> educations;
     private String skills;
 
     @ElementCollection(targetClass=Role.class, fetch = FetchType.EAGER)
@@ -105,6 +110,13 @@ public class User {
         this.roles = roles;
     }
 
+    public Collection<Experience> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(Collection<Experience> experiences) {
+        this.experiences = experiences;
+    }
 
     @Override
     public String toString() {

@@ -20,7 +20,9 @@ create table if not exists user
   youtubeLink varchar(455) null,
   aboutMe varchar(455) null,
   skills varchar(455) null,
-  contact_id bigint null
+  contact_id bigint null,
+  constraint user_contact_id_fk
+  foreign key(contact_id) references contact (id)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -40,3 +42,33 @@ create table if not exists contact
   city varchar(455) null,
   country varchar(455) null
 )
+
+CREATE TABLE IF NOT EXISTS `experience` (
+  `id`             BIGINT PRIMARY KEY                              AUTO_INCREMENT,
+  `company`        VARCHAR(45)                                      DEFAULT NULL,
+  `position`       VARCHAR(455)                                     DEFAULT NULL,
+  `responsibility` VARCHAR(455)                                     DEFAULT NULL,
+  `from`           TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  `until`          TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  CONSTRAINT experience_id_uindex UNIQUE (id)
+);
+
+
+create table user_experience
+(
+  user_username varchar(45) not null,
+  experiences_id bigint not null,
+  constraint user_experience_user_USERNAME_fk
+  foreign key (user_username) references startup.user (USERNAME),
+  constraint user_experience_experience_id_fk
+  foreign key (experiences_id) references startup.experience (id)
+)
+;
+
+create index user_experience_experience_id_fk
+  on user_experience (experiences_id)
+;
+
+create index user_experience_user_USERNAME_fk
+  on user_experience (user_username)
+;

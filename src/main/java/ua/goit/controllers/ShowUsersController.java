@@ -51,6 +51,8 @@ public class ShowUsersController {
         user.setRoles(roles);
         Contact contact = new Contact("email","0503357740", City.KYIV, Country.UKRAINE);
         user.setContact(contact);
+//        Experience experience = new Experience();
+//        user.setExperiences(Arrays.asList(experience));
         user.setPersonalPageFotoLink("jpeg/personalPageFoto/adminFoto.jpg");//TODO Как ссылку указывать?
         user.setYoutubeLink("https://www.youtube.com/watch?v=3wBteulZaAs&index=1&list=PL6jg6AGdCNaWF-sUH2QDudBRXo54zuN1t");
         user.setAboutMe("I'm admin!");

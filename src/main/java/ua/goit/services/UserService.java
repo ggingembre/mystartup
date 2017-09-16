@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.dao.ContactDao;
 import ua.goit.dao.UserDao;
+import ua.goit.entity.Contact;
 import ua.goit.entity.User;
 
 import java.util.List;
@@ -30,7 +31,15 @@ public class UserService {
 
     @Transactional
     public <S extends User> S save(S entity) {
-        contactDao.save(entity.getContact());
+        //TODO не надо проверять есть ли в бд такой contact  или experiences, потому что пока в приложении сделано так, что они индивидуальны
+        Contact contact = entity.getContact();
+        if (contact != null) {
+            contactDao.save(contact);//нужно для случая @OneToOne Contact; в случае @Embeddable Contact - убрать
+        }
+//        Collection<Experience> experiences = entity.getExperiences();
+//        if (experiences != null ) {
+//            experienceDao.save(entity.getExperiences());
+//        }
         return dao.save(entity);
     }
 
