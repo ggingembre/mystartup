@@ -8,6 +8,7 @@ import javax.persistence.*;
  */
 //@Embeddable  ////можно сделать вложенную таблицу (убрать private long id)
 @Entity
+@Table(name = "contact")
 public class Contact {
 
     @Id
