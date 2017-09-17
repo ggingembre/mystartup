@@ -96,8 +96,8 @@ public class BusinessPlan {
 
     // many to many relationship mapping:
 
+    //@JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "businessPlans")
-    @JsonIgnore
     private Collection<Project> projects;
 
 
@@ -335,7 +335,7 @@ public class BusinessPlan {
         return projects;
     }
 
-    @JsonProperty
+    //@JsonProperty
     public void setProjects(Collection<Project> projects) {
         this.projects = projects;
     }

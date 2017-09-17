@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -66,8 +67,8 @@ public class Project {
 
     // one start up may have many business plans, and one business plan may have many start ups: many to many
 
+    //@JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<BusinessPlan> businessPlans = new HashSet<BusinessPlan>(0);
 
     @JoinTable(name = "projects_businessplans", joinColumns = {
@@ -75,7 +76,7 @@ public class Project {
             inverseJoinColumns = { @JoinColumn(name = "businessplan_id",
                     nullable = false, updatable = false) })
 
-    @JsonProperty
+    //@JsonProperty
     public void setBusinessPlans(Set<BusinessPlan> businessPlans) {
         this.businessPlans = businessPlans;
     }
@@ -236,10 +237,10 @@ public class Project {
     public String toString() {
         return "Project{" +
                 "projectId=" + projectId +
-                ", projectName='" + projectName + '\'' +
-                ", projectIndustry=" + projectIndustry +
-                ", projectAddress=" + projectAddress +
-                ", projectDescription='" + projectDescription + '\'' +
+                "\nprojectName='" + projectName +
+                "\nprojectIndustry=" + projectIndustry +
+                "\nprojectAddress=" + projectAddress +
+                "\nprojectDescription='" + projectDescription + '\'' +
                 ", logoLink='" + logoLink + '\'' +
                 ", projectDocLink='" + projectDocLink + '\'' +
                 ", projectSiteLink='" + projectSiteLink + '\'' +
@@ -250,7 +251,7 @@ public class Project {
                 ", projectLastChange=" + projectLastChange +
                 ", isActive=" + isActive +
                 ", projectPreviousRounds=" + projectPreviousRounds +
-                ", businessPlans=" + businessPlans +
+                //", businessPlans=" + Arrays.toString(businessPlans.toArray()) +
                 '}';
     }
 }
