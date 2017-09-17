@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Guillaume Gingembre on 14/09/2017.
  */
@@ -94,6 +97,7 @@ public class BusinessPlan {
     // many to many relationship mapping:
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "businessPlans")
+    @JsonIgnore
     private Collection<Project> projects;
 
 
@@ -326,10 +330,12 @@ public class BusinessPlan {
         isActive = active;
     }
 
+    @JsonIgnore
     public Collection<Project> getProjects() {
         return projects;
     }
 
+    @JsonProperty
     public void setProjects(Collection<Project> projects) {
         this.projects = projects;
     }

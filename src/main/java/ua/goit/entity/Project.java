@@ -1,5 +1,8 @@
 package ua.goit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -64,6 +67,7 @@ public class Project {
     // one start up may have many business plans, and one business plan may have many start ups: many to many
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<BusinessPlan> businessPlans = new HashSet<BusinessPlan>(0);
 
     @JoinTable(name = "projects_businessplans", joinColumns = {
@@ -71,10 +75,12 @@ public class Project {
             inverseJoinColumns = { @JoinColumn(name = "businessplan_id",
                     nullable = false, updatable = false) })
 
+    @JsonProperty
     public void setBusinessPlans(Set<BusinessPlan> businessPlans) {
         this.businessPlans = businessPlans;
     }
 
+    @JsonIgnore
     public Set<BusinessPlan> getBusinessPlans() {
         return businessPlans;
     }

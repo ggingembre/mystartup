@@ -85,8 +85,8 @@ public class ShowProjectsController {
     }
 
 
-    /*
 
+/*
     @PostConstruct
     public void initDefaultProjects() {
 
