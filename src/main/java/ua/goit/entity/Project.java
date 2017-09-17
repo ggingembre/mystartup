@@ -67,20 +67,23 @@ public class Project {
     private Set<BusinessPlan> businessPlans = new HashSet<BusinessPlan>(0);
 
     @JoinTable(name = "projects_businessplans", joinColumns = {
-            @JoinColumn(name = "project_Id", nullable = false, updatable = false) },
+            @JoinColumn(name = "project_id", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "businessplan_id",
                     nullable = false, updatable = false) })
-
-    public Set<BusinessPlan> getBusinessPlans() {
-        return businessPlans;
-    }
 
     public void setBusinessPlans(Set<BusinessPlan> businessPlans) {
         this.businessPlans = businessPlans;
     }
 
+    public Set<BusinessPlan> getBusinessPlans() {
+        return businessPlans;
+    }
 
-    public Project(){}
+
+
+
+    public Project(){
+    }
 
     public Project(String projectName, Industry projectIndustry, Address projectAddress, String projectDescription, String logoLink, String projectDocLink, String projectSiteLink, BigDecimal projectExpectedRaise, BigDecimal projectAmountRaised, BigDecimal projectMinInv, double projectReturn, LocalDate projectLastChange, boolean isActive, BigDecimal projectPreviousRounds) {
         this.projectName = projectName;

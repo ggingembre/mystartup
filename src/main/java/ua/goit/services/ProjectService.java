@@ -32,17 +32,17 @@ public class ProjectService {
     }
 
     @Transactional(readOnly = true)
-    public Project findOne(String s) {
+    public Project findOne(Long s) {
         return dao.findOne(s);
     }
 
     @Transactional(readOnly = true)
-    public boolean exists(String s) {
+    public boolean exists(Long s) {
         return dao.exists(s);
     }
 
     @Transactional
-    public void delete(String s) {
+    public void delete(Long s) {
         dao.delete(s);
     }
 
@@ -50,6 +50,5 @@ public class ProjectService {
     public void delete(Project entity) {
         dao.delete(entity);
     }
-
 
 }

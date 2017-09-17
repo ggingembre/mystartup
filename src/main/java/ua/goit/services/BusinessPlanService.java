@@ -34,17 +34,17 @@ public class BusinessPlanService {
     }
 
     @Transactional(readOnly = true)
-    public BusinessPlan findOne(String s) {
+    public BusinessPlan findOne(Long s) {
         return dao.findOne(s);
     }
 
     @Transactional(readOnly = true)
-    public boolean exists(String s) {
+    public boolean exists(Long s) {
         return dao.exists(s);
     }
 
     @Transactional
-    public void delete(String s) {
+    public void delete(Long s) {
         dao.delete(s);
     }
 

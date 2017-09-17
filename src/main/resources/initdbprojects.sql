@@ -1,5 +1,3 @@
--- CREATE DATABASE  IF NOT EXISTS `startuptest` /*!40100 DEFAULT CHARACTER SET latin1 */;
--- USE `startuptest`;
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: localhost    Database: startuptest
@@ -42,12 +40,12 @@ DROP TABLE IF EXISTS `businessplans`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `businessplans` (
   `businessplan_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `businessplan_amount_raised` decimal(19,2) DEFAULT 0,
-  `businessplan_expected_raise` decimal(19,2) DEFAULT 0,
-  `businessplan_last_change` DATE DEFAULT NULL,
-  `businessplan_min_inv` decimal(19,2) DEFAULT 0,
-  `businessplan_return` double DEFAULT 0,
   `business_model` varchar(255) DEFAULT NULL,
+  `businessplan_amount_raised` decimal(19,2) DEFAULT NULL,
+  `businessplan_expected_raise` decimal(19,2) DEFAULT NULL,
+  `businessplan_last_change` date DEFAULT NULL,
+  `businessplan_min_inv` decimal(19,2) DEFAULT NULL,
+  `businessplan_return` double DEFAULT NULL,
   `collateral` varchar(255) DEFAULT NULL,
   `competition` varchar(255) DEFAULT NULL,
   `current_state` varchar(255) DEFAULT NULL,
@@ -55,11 +53,11 @@ CREATE TABLE `businessplans` (
   `finances` varchar(255) DEFAULT NULL,
   `funds_uses` varchar(255) DEFAULT NULL,
   `idea` varchar(255) DEFAULT NULL,
-  `isActive` bit(1) DEFAULT 1,
+  `isActive` bit(1) DEFAULT NULL,
   `market` varchar(255) DEFAULT NULL,
   `mentors` varchar(255) DEFAULT NULL,
   `opportunity` varchar(255) DEFAULT NULL,
-  `previous_rounds` decimal(19,2) DEFAULT 0,
+  `previous_rounds` decimal(19,2) DEFAULT NULL,
   `project_id` bigint(20) DEFAULT NULL,
   `risks` varchar(255) DEFAULT NULL,
   `solution` varchar(255) DEFAULT NULL,
@@ -93,18 +91,18 @@ DROP TABLE IF EXISTS `projects`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `projects` (
   `project_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `isActive` bit(1) DEFAULT 1,
+  `isActive` bit(1) DEFAULT NULL,
   `project_logo_link` varchar(255) DEFAULT NULL,
-  `project_amount_raised` decimal(19,2) DEFAULT 0,
+  `project_amount_raised` decimal(19,2) DEFAULT NULL,
   `project_description` varchar(255) DEFAULT NULL,
   `project_doc_link` varchar(255) DEFAULT NULL,
-  `project_expected_raise` decimal(19,2) DEFAULT 0,
-  `project_industry` int(11) NOT NULL,
-  `project_last_change` date NOT NULL,
-  `project_min_inv` decimal(19,2) DEFAULT 0,
+  `project_expected_raise` decimal(19,2) DEFAULT NULL,
+  `project_industry` int(11) DEFAULT NULL,
+  `project_last_change` date DEFAULT NULL,
+  `project_min_inv` decimal(19,2) DEFAULT NULL,
   `project_name` varchar(255) DEFAULT NULL,
-  `previous_rounds` decimal(19,2) DEFAULT 0,
-  `project_return` double DEFAULT 0,
+  `previous_rounds` decimal(19,2) DEFAULT NULL,
+  `project_return` double DEFAULT NULL,
   `project_site_link` varchar(255) DEFAULT NULL,
   `projectAddress_address_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`project_id`),
@@ -139,4 +137,4 @@ CREATE TABLE `projects_businessplans` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-15  9:41:36
+-- Dump completed on 2017-09-17  0:31:47

@@ -85,7 +85,8 @@ public class ShowProjectsController {
     }
 
 
-/*
+    /*
+
     @PostConstruct
     public void initDefaultProjects() {
 
@@ -120,6 +121,6 @@ public class ShowProjectsController {
 
         System.out.println("success!");
 
-    }*/
+    } */
 
 }

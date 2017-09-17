@@ -2,19 +2,21 @@ package ua.goit.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.goit.entity.Address;
-import ua.goit.entity.BusinessPlan;
-import ua.goit.entity.Country;
-import ua.goit.entity.Region;
+import ua.goit.dao.ProjectDao;
+import ua.goit.entity.*;
 import ua.goit.services.BusinessPlanService;
+import ua.goit.services.ProjectService;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,10 @@ public class ShowBusinessPlansController {
         this.businessPlansService = businessPlansService;
     }
 
+    @Autowired
+    private ProjectDao projectDao;
+    //private ProjectService projectService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/show")
     public ModelAndView showBusinessPlans() {
         List<String> businessPlanNames =
@@ -43,7 +49,7 @@ public class ShowBusinessPlansController {
         return modelAndView;
     }
 
-    /*
+
     @PostConstruct
     public void initDefaultBusinessPlans() {
 
@@ -84,9 +90,19 @@ public class ShowBusinessPlansController {
         businessPlansService.save(businessplan1);
         businessPlansService.save(businessPlan2);
 
+        System.out.println("updating projects");
+
+        Project project2 = projectDao.findOne(Long.valueOf(2));
+        project2.getBusinessPlans().add(businessplan1);
+        projectDao.saveAndFlush(project2);
+
+        Project project3 = projectDao.findOne(Long.valueOf(3));
+        project3.getBusinessPlans().add(businessPlan2);
+        projectDao.saveAndFlush(project3);
+
         System.out.println("success!");
 
-    } */
+    }
 
 
 
