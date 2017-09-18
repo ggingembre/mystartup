@@ -8,16 +8,20 @@ import ua.goit.dao.UserDao;
 import ua.goit.entity.Contact;
 import ua.goit.entity.User;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by User on 23.08.2017.
+ * Service for {@link ua.goit.entity.User} which will use
+ * {@link ua.goit.dao.UserDao} and  {@link ua.goit.dao.ContactDao} as data access object
+ * @KontarMaryna
  */
 @Service
 public class UserService {
 
     private final UserDao dao;
     private final ContactDao contactDao;
+
     @Autowired
     public UserService(UserDao dao, ContactDao contactDao) {
         this.dao = dao;
@@ -46,6 +50,11 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findOne(String s) {
         return dao.findOne(s);
+    }
+
+    @Transactional(readOnly = true)
+    public User getOne(String s) {
+        return dao.getOne(s);
     }
 
     @Transactional(readOnly = true)

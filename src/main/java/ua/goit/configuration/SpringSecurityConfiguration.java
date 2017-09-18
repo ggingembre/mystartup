@@ -9,7 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Spring security configuration with Basic login form.
+ * Spring security configuration with login form.
+ *
  * @KontarMaryna
  */
 @Configuration
@@ -17,7 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @ComponentScan({"ua.goit.services"})
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean public BCryptPasswordEncoder passwordEncoder() {
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -40,5 +42,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .csrf().disable()
 
+//        .antMatchers("/login*").anonymous()
+//        .and()
+//                .formLogin()
+//                .loginPage("/login.html")
+//                .defaultSuccessUrl("/homepage.html")
+//                .failureUrl("/login.html?error=true")
+//                .and()
+//                .logout().logoutSuccessUrl("/login.html");
     }
 }

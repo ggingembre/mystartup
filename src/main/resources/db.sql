@@ -10,65 +10,83 @@
 
 -- ДОПИСАТЬ FOREIGN KEYS, INDEXES, ПРОВЕРИТЬ ДЛИНУ ПЕРЕМЕННЫХ
 
-create table if not exists user
+CREATE TABLE IF NOT EXISTS contact
 (
-  USERNAME varchar(45) not null
-    primary key,
-  PASSWORD varchar(455) not null,
-  profileFotoLink varchar(455) null,
-  personalPageFotoLink varchar(455) null,
-  youtubeLink varchar(455) null,
-  aboutMe varchar(455) null,
-  skills varchar(455) null,
-  contact_id bigint null,
-  constraint user_contact_id_fk
-  foreign key(contact_id) references contact (id)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-create table if not exists user_roles
+  id          BIGINT AUTO_INCREMENT
+    PRIMARY KEY,
+  email       VARCHAR(45)  NOT NULL,
+  phoneNumber VARCHAR(455) NULL,
+  city        VARCHAR(455) NULL,
+  country     VARCHAR(455) NULL
+);
+CREATE TABLE IF NOT EXISTS user
 (
-  USER_USERNAME varchar(45) not null,
-  ROLE varchar(45) not null,
-  primary key (USER_USERNAME, ROLE)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-create table if not exists contact
-(
-  id bigint auto_increment
-    primary key,
-  email varchar(45) not null,
-  phoneNumber varchar(455) null,
-  city varchar(455) null,
-  country varchar(455) null
+  username             VARCHAR(45)  NOT NULL
+    PRIMARY KEY,
+  password             VARCHAR(455) NOT NULL,
+  profileFotoLink      VARCHAR(455) NULL,
+  personalPageFotoLink VARCHAR(455) NULL,
+  youtubeLink          VARCHAR(455) NULL,
+  aboutMe              VARCHAR(455) NULL,
+  skills               VARCHAR(455) NULL,
+  contact_id           BIGINT       NULL,
+  CONSTRAINT user_contact_id_fk
+  FOREIGN KEY (contact_id) REFERENCES contact (id)
 )
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+
+CREATE TABLE IF NOT EXISTS user_roles
+(
+  user_username VARCHAR(45) NOT NULL,
+  role          VARCHAR(45) NOT NULL,
+  PRIMARY KEY (user_username, role)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
 
 CREATE TABLE IF NOT EXISTS `experience` (
   `id`             BIGINT PRIMARY KEY                              AUTO_INCREMENT,
-  `company`        VARCHAR(45)                                      DEFAULT NULL,
-  `position`       VARCHAR(455)                                     DEFAULT NULL,
-  `responsibility` VARCHAR(455)                                     DEFAULT NULL,
-  `from`           TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
-  `until`          TIMESTAMP DEFAULT '0000-00-00 00:00:00' NOT NULL,
+  `company`        VARCHAR(45)                                     DEFAULT NULL,
+  `position`       VARCHAR(455)                                    DEFAULT NULL,
+  `responsibility` VARCHAR(455)                                    DEFAULT NULL,
+--    `from`           DATE                                            DEFAULT NULL,
+--    `until`          DATE                                            DEFAULT NULL,
   CONSTRAINT experience_id_uindex UNIQUE (id)
 );
 
 
-create table user_experience
+CREATE TABLE IF NOT EXISTS user_experience
 (
-  user_username varchar(45) not null,
-  experiences_id bigint not null,
-  constraint user_experience_user_USERNAME_fk
-  foreign key (user_username) references startup.user (USERNAME),
-  constraint user_experience_experience_id_fk
-  foreign key (experiences_id) references startup.experience (id)
-)
-;
+  user_username  VARCHAR(45) NOT NULL,
+  experiences_id BIGINT      NOT NULL,
+  CONSTRAINT user_experience_user_username_fk
+  FOREIGN KEY (user_username) REFERENCES user (username),
+  CONSTRAINT user_experience_experiences_id_fk
+  FOREIGN KEY (experiences_id) REFERENCES experience (id)
+);
 
-create index user_experience_experience_id_fk
-  on user_experience (experiences_id)
-;
 
-create index user_experience_user_USERNAME_fk
-  on user_experience (user_username)
-;
+CREATE TABLE IF NOT EXISTS `education` (
+  `id`                     BIGINT PRIMARY KEY                              AUTO_INCREMENT,
+  `educationalInstitution` VARCHAR(455)                                    DEFAULT NULL,
+  `educationalStage`       VARCHAR(455)                                    DEFAULT NULL,
+  `faculty`                VARCHAR(455)                                    DEFAULT NULL,
+  `fieldOfStudy`           VARCHAR(455)                                    DEFAULT NULL,
+  `modeOfStudy`            VARCHAR(45)                                     DEFAULT NULL,
+--   `from`                   DATE                                            DEFAULT NULL,
+--   `until`                  DATE                                            DEFAULT NULL,
+  CONSTRAINT experience_id_uindex UNIQUE (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_education
+(
+  user_username  VARCHAR(45) NOT NULL,
+  educations_id BIGINT      NOT NULL,
+  CONSTRAINT user_education_user_username_fk
+  FOREIGN KEY (user_username) REFERENCES user (username),
+  CONSTRAINT user_education_educations_id_fk
+  FOREIGN KEY (educations_id) REFERENCES education (id)
+);

@@ -1,9 +1,10 @@
 package ua.goit.entity;
 
 /**
- * Created by Maryna Kontar on 14.09.2017.
+ * List of cities
  * @KontarMaryna
  */
 public enum  City {
+    //TODO сделать поле city просто String?
     KYIV, PARIS, LVIV, KHARKIV
 }
