@@ -19,8 +19,8 @@ public class Experience {
     private String company;
     private String position;
     private String responsibility;
-//    private LocalDate from;
-//    private LocalDate until;
+    private LocalDate from;
+    private LocalDate until;
 
 //for bidirectional mapping
 //    @ManyToOne
@@ -28,21 +28,21 @@ public class Experience {
 
     public Experience() {
     }
-//
-//    public Experience(String company, String position, String responsibility, LocalDate from, LocalDate until) {
-//        this.company = company;
-//        this.position = position;
-//        this.responsibility = responsibility;
-//        this.from = from;
-//        this.until = until;
-//    }
 
-
-    public Experience(String company, String position, String responsibility) {
+    public Experience(String company, String position, String responsibility, LocalDate from, LocalDate until) {
         this.company = company;
         this.position = position;
         this.responsibility = responsibility;
+        this.from = from;
+        this.until = until;
     }
+
+
+//    public Experience(String company, String position, String responsibility) {
+//        this.company = company;
+//        this.position = position;
+//        this.responsibility = responsibility;
+//    }
 
     public long getId() {
         return id;
@@ -72,21 +72,21 @@ public class Experience {
         this.responsibility = responsibility;
     }
 
-//    public LocalDate getFrom() {
-//        return from;
-//    }
-//
-//    public void setFrom(LocalDate from) {
-//        this.from = from;
-//    }
-//
-//    public LocalDate getUntil() {
-//        return until;
-//    }
-//
-//    public void setUntil(LocalDate until) {
-//        this.until = until;
-//    }
+    public LocalDate getFrom() {
+        return from;
+    }
+
+    public void setFrom(LocalDate from) {
+        this.from = from;
+    }
+
+    public LocalDate getUntil() {
+        return until;
+    }
+
+    public void setUntil(LocalDate until) {
+        this.until = until;
+    }
 
 //    public User getUser() {
 //        return user;
@@ -103,8 +103,8 @@ public class Experience {
                 ", company='" + company + '\'' +
                 ", position='" + position + '\'' +
                 ", responsibility='" + responsibility + '\'' +
-//                ", from=" + from +
-//                ", until=" + until +
+                ", from=" + from +
+                ", until=" + until +
                 '}';
     }
 }

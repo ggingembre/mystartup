@@ -23,30 +23,30 @@ public class Education {
 
     @Enumerated(EnumType.STRING)
     private ModeOfStudy modeOfStudy;
-//    private LocalDate from;
-//    private LocalDate until;
+    private LocalDate from;
+    private LocalDate until;
 
     public Education() {
     }
 
-//    public Education(String educationalInstitution, String educationalStage, String faculty, String fieldOfStudy,
-//                     ModeOfStudy modeOfStudy, LocalDate from, LocalDate until) {
-//        this.educationalInstitution = educationalInstitution;
-//        this.educationalStage = educationalStage;
-//        this.faculty = faculty;
-//        this.fieldOfStudy = fieldOfStudy;
-//        this.modeOfStudy = modeOfStudy;
-//        this.from = from;
-//        this.until = until;
-//    }
-
-    public Education(String educationalInstitution, String educationalStage, String faculty, String fieldOfStudy, ModeOfStudy modeOfStudy) {
+    public Education(String educationalInstitution, String educationalStage, String faculty, String fieldOfStudy,
+                     ModeOfStudy modeOfStudy, LocalDate from, LocalDate until) {
         this.educationalInstitution = educationalInstitution;
         this.educationalStage = educationalStage;
         this.faculty = faculty;
         this.fieldOfStudy = fieldOfStudy;
         this.modeOfStudy = modeOfStudy;
+        this.from = from;
+        this.until = until;
     }
+
+//    public Education(String educationalInstitution, String educationalStage, String faculty, String fieldOfStudy, ModeOfStudy modeOfStudy) {
+//        this.educationalInstitution = educationalInstitution;
+//        this.educationalStage = educationalStage;
+//        this.faculty = faculty;
+//        this.fieldOfStudy = fieldOfStudy;
+//        this.modeOfStudy = modeOfStudy;
+//    }
 
     public long getId() {
         return id;
@@ -92,21 +92,21 @@ public class Education {
         this.modeOfStudy = modeOfStudy;
     }
 
-//    public LocalDate getFrom() {
-//        return from;
-//    }
-//
-//    public void setFrom(LocalDate from) {
-//        this.from = from;
-//    }
-//
-//    public LocalDate getUntil() {
-//        return until;
-//    }
-//
-//    public void setUntil(LocalDate until) {
-//        this.until = until;
-//    }
+    public LocalDate getFrom() {
+        return from;
+    }
+
+    public void setFrom(LocalDate from) {
+        this.from = from;
+    }
+
+    public LocalDate getUntil() {
+        return until;
+    }
+
+    public void setUntil(LocalDate until) {
+        this.until = until;
+    }
 
     @Override
     public String toString() {
@@ -117,8 +117,8 @@ public class Education {
                 ", faculty='" + faculty + '\'' +
                 ", fieldOfStudy='" + fieldOfStudy + '\'' +
                 ", modeOfStudy=" + modeOfStudy +
-//                ", from=" + from +
-//                ", until=" + until +
+                ", from=" + from +
+                ", until=" + until +
                 '}';
     }
 }

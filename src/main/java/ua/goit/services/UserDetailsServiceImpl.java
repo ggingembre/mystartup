@@ -117,9 +117,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return user.getExperiences();
         }
 
-//        public Collection<Education> getEducations() {
-//            return user.getEducations();
-//        }
+        public Collection<Education> getEducations() {
+            return user.getEducations();
+        }
 
         //TODO 5 Добавлять геттеры для всех новых полей, которые появятся в {@link ua.goit.entity.User}
     }

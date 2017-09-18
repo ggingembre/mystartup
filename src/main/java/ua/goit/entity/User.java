@@ -147,7 +147,6 @@ public class User {
                 ", personalPageFotoLink='" + personalPageFotoLink + '\'' +
                 ", youtubeLink='" + youtubeLink + '\'' +
                 ", aboutMe='" + aboutMe + '\'' +
-//                ", experiences=" + experiences +
                 ", skills='" + skills + '\'' +
                 ", roles=" + roles +
                 '}';

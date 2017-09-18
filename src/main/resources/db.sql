@@ -8,7 +8,7 @@
 -- -----------------------------------------------------
 -- CREATE SCHEMA IF NOT EXISTS `STARTUP` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ; --
 
--- ДОПИСАТЬ FOREIGN KEYS, INDEXES, ПРОВЕРИТЬ ДЛИНУ ПЕРЕМЕННЫХ
+-- !!!!ДОПИСАТЬ FOREIGN KEYS, INDEXES, ПРОВЕРИТЬ ДЛИНУ ПЕРЕМЕННЫХ
 
 CREATE TABLE IF NOT EXISTS contact
 (
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `experience` (
   `company`        VARCHAR(45)                                     DEFAULT NULL,
   `position`       VARCHAR(455)                                    DEFAULT NULL,
   `responsibility` VARCHAR(455)                                    DEFAULT NULL,
---    `from`           DATE                                            DEFAULT NULL,
---    `until`          DATE                                            DEFAULT NULL,
+  `from`           DATE                                            DEFAULT NULL,
+  `until`          DATE                                            DEFAULT NULL,
   CONSTRAINT experience_id_uindex UNIQUE (id)
 );
 
@@ -76,8 +76,8 @@ CREATE TABLE IF NOT EXISTS `education` (
   `faculty`                VARCHAR(455)                                    DEFAULT NULL,
   `fieldOfStudy`           VARCHAR(455)                                    DEFAULT NULL,
   `modeOfStudy`            VARCHAR(45)                                     DEFAULT NULL,
---   `from`                   DATE                                            DEFAULT NULL,
---   `until`                  DATE                                            DEFAULT NULL,
+  `from`                   DATE                                            DEFAULT NULL,
+  `until`                  DATE                                            DEFAULT NULL,
   CONSTRAINT experience_id_uindex UNIQUE (id)
 );
 
