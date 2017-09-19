@@ -36,13 +36,6 @@ public class Experience {
         this.until = until;
     }
 
-
-//    public Experience(String company, String position, String responsibility) {
-//        this.company = company;
-//        this.position = position;
-//        this.responsibility = responsibility;
-//    }
-
     public Long getId() {
         return id;
     }

@@ -14,7 +14,8 @@ import java.util.Collection;
 @Entity
 @Table(name = "user")
 public class User {
-//
+
+//для случая, если захотим хранить и id и NaturalId
 //    @Id
 //    Long id;
 //    @NaturalId

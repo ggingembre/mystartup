@@ -8,7 +8,6 @@ import ua.goit.dao.UserDao;
 import ua.goit.entity.Contact;
 import ua.goit.entity.User;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -40,10 +39,6 @@ public class UserService {
         if (contact != null) {
             contactDao.save(contact);//нужно для случая @OneToOne Contact; в случае @Embeddable Contact - убрать
         }
-//        Collection<Experience> experiences = entity.getExperiences();
-//        if (experiences != null ) {
-//            experienceDao.save(entity.getExperiences());
-//        }
         return dao.save(entity);
     }
 

@@ -28,11 +28,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 //
 //    }
 
-    //TODO 7 переадресакция не работает. проверить почему
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // View -> RedirectView
-        registry.addRedirectViewController("/login", "/user/show");
+        registry.addRedirectViewController("/user", "/user/show");
     }
 
     @Bean

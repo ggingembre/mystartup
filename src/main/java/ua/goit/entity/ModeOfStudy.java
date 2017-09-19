@@ -1,7 +1,8 @@
 package ua.goit.entity;
 
 /**
- * Created by User on 13.09.2017.
+ * List of Mode of study
+ * @KontarMaryna
  */
 public enum  ModeOfStudy {
     FULL_TIME, REMOTE, EVENING, EXTRAMURAL

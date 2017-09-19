@@ -39,14 +39,6 @@ public class Education {
         this.until = until;
     }
 
-//    public Education(String educationalInstitution, String educationalStage, String faculty, String fieldOfStudy, ModeOfStudy modeOfStudy) {
-//        this.educationalInstitution = educationalInstitution;
-//        this.educationalStage = educationalStage;
-//        this.faculty = faculty;
-//        this.fieldOfStudy = fieldOfStudy;
-//        this.modeOfStudy = modeOfStudy;
-//    }
-
     public Long getId() {
         return id;
     }
