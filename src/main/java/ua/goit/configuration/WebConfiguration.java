@@ -31,6 +31,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         // View -> RedirectView
+        registry.addRedirectViewController("/", "/WEB-INF/jsp/index.jsp");
         registry.addRedirectViewController("/user", "/user/show");
     }
 
