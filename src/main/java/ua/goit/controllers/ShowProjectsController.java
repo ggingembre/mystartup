@@ -3,12 +3,10 @@ package ua.goit.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.entity.*;
 import ua.goit.services.ProjectService;
@@ -51,6 +49,7 @@ public class ShowProjectsController {
         return modelAndView;
     }
 
+
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ResponseStatus(value= HttpStatus.OK)
     public ModelAndView showForm() {
@@ -81,8 +80,65 @@ public class ShowProjectsController {
         model.addAttribute("projectPreviousRounds", project.getProjectPreviousRounds());
         model.addAttribute("projectLastChange", project.getProjectLastChange());
         //model.addAttribute("isActive", project.isActive());
+
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("projectView");
+        modelAndView.addObject("projectView", model);
+
         return "projectView";
     }
+
+    /*
+    // show user
+    @RequestMapping(value = "/showproject/{id}", method = RequestMethod.GET)
+    public ModelAndView showProject(@PathVariable("id") long id, Model model) {
+
+        //logger.debug("showUser() id: {}", id);
+
+        Project project = projectsService.findOne(id);
+        if (project == null) {
+            model.addAttribute("css", "danger");
+            model.addAttribute("msg", "User not found");
+        }
+        model.addAttribute("project", project);
+
+        return model;
+
+    } */
+
+    /*@RequestMapping(value = "/add", method = RequestMethod.GET)
+    @ResponseStatus(value= HttpStatus.OK)
+    public ModelAndView showForm() {
+        //ModelAndView modelAndView = new ModelAndView();
+        //modelAndView.setViewName("projectRegistration");
+        //modelAndView.addObject(new Project());
+        //modelAndView.addObject("industries", Industry.values());
+        //return modelAndView;
+        return new ModelAndView("projectRegistration", "command", new Project());
+    }
+
+    @RequestMapping(value = "/show", method = RequestMethod.POST)
+    public String submit(@Valid @ModelAttribute("projectView")Project project,
+                         BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "projectInputError";
+        }
+
+        model.addAttribute("projectName", project.getProjectName());
+        model.addAttribute("projectIndustry", project.getProjectIndustry());
+        model.addAttribute("projectAddress", project.getProjectAddress());
+        model.addAttribute("projectDescription", project.getProjectDescription());
+        model.addAttribute("projectSiteLink", project.getProjectSiteLink());
+        model.addAttribute("projectExpectedRaise", project.getProjectExpectedRaise());
+        model.addAttribute("projectAmountRaised", project.getProjectAmountRaised());
+        model.addAttribute("ProjectMinInv", project.getProjectMinInv());
+        model.addAttribute("projectReturn", project.getProjectReturn());
+        model.addAttribute("projectPreviousRounds", project.getProjectPreviousRounds());
+        model.addAttribute("projectLastChange", project.getProjectLastChange());
+        //model.addAttribute("isActive", project.isActive());
+        return "projectView";
+    }*/
 
 
 
