@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
   `company`        VARCHAR(45)                                     DEFAULT NULL,
   `position`       VARCHAR(455)                                    DEFAULT NULL,
   `responsibility` VARCHAR(455)                                    DEFAULT NULL,
-  `from`           DATE                                            DEFAULT NULL,
+  `fromDate`       DATE                                            DEFAULT NULL,
   `until`          DATE                                            DEFAULT NULL,
   CONSTRAINT experience_id_uindex UNIQUE (id)
 );
@@ -76,14 +76,14 @@ CREATE TABLE IF NOT EXISTS `education` (
   `faculty`                VARCHAR(455)                                    DEFAULT NULL,
   `fieldOfStudy`           VARCHAR(455)                                    DEFAULT NULL,
   `modeOfStudy`            VARCHAR(45)                                     DEFAULT NULL,
-  `from`                   DATE                                            DEFAULT NULL,
+  `fromDate`               DATE                                            DEFAULT NULL,
   `until`                  DATE                                            DEFAULT NULL,
   CONSTRAINT experience_id_uindex UNIQUE (id)
 );
 
 CREATE TABLE IF NOT EXISTS user_education
 (
-  user_username  VARCHAR(45) NOT NULL,
+  user_username VARCHAR(45) NOT NULL,
   educations_id BIGINT      NOT NULL,
   CONSTRAINT user_education_user_username_fk
   FOREIGN KEY (user_username) REFERENCES user (username),

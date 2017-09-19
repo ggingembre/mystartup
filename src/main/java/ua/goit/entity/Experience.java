@@ -1,7 +1,6 @@
 package ua.goit.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 /**
@@ -15,11 +14,11 @@ public class Experience {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String company;
     private String position;
     private String responsibility;
-    private LocalDate from;
+    private LocalDate fromDate;
     private LocalDate until;
 
 //for bidirectional mapping
@@ -33,7 +32,7 @@ public class Experience {
         this.company = company;
         this.position = position;
         this.responsibility = responsibility;
-        this.from = from;
+        this.fromDate = from;
         this.until = until;
     }
 
@@ -44,7 +43,7 @@ public class Experience {
 //        this.responsibility = responsibility;
 //    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -72,12 +71,12 @@ public class Experience {
         this.responsibility = responsibility;
     }
 
-    public LocalDate getFrom() {
-        return from;
+    public LocalDate getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom(LocalDate from) {
-        this.from = from;
+    public void setFromDate(LocalDate fromDate) {
+        this.fromDate = fromDate;
     }
 
     public LocalDate getUntil() {
@@ -103,7 +102,7 @@ public class Experience {
                 ", company='" + company + '\'' +
                 ", position='" + position + '\'' +
                 ", responsibility='" + responsibility + '\'' +
-                ", from=" + from +
+                ", fromDate=" + fromDate +
                 ", until=" + until +
                 '}';
     }

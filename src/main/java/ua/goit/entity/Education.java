@@ -1,7 +1,6 @@
 package ua.goit.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
 /**
@@ -15,7 +14,7 @@ public class Education {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String educationalInstitution;
     private String educationalStage;
     private String faculty;
@@ -23,7 +22,7 @@ public class Education {
 
     @Enumerated(EnumType.STRING)
     private ModeOfStudy modeOfStudy;
-    private LocalDate from;
+    private LocalDate fromDate;
     private LocalDate until;
 
     public Education() {
@@ -36,7 +35,7 @@ public class Education {
         this.faculty = faculty;
         this.fieldOfStudy = fieldOfStudy;
         this.modeOfStudy = modeOfStudy;
-        this.from = from;
+        this.fromDate = from;
         this.until = until;
     }
 
@@ -48,7 +47,7 @@ public class Education {
 //        this.modeOfStudy = modeOfStudy;
 //    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -92,12 +91,12 @@ public class Education {
         this.modeOfStudy = modeOfStudy;
     }
 
-    public LocalDate getFrom() {
-        return from;
+    public LocalDate getFromDate() {
+        return fromDate;
     }
 
-    public void setFrom(LocalDate from) {
-        this.from = from;
+    public void setFromDate(LocalDate fromDate) {
+        this.fromDate = fromDate;
     }
 
     public LocalDate getUntil() {
@@ -117,7 +116,7 @@ public class Education {
                 ", faculty='" + faculty + '\'' +
                 ", fieldOfStudy='" + fieldOfStudy + '\'' +
                 ", modeOfStudy=" + modeOfStudy +
-                ", from=" + from +
+                ", fromDate=" + fromDate +
                 ", until=" + until +
                 '}';
     }

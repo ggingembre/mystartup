@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `education` (
   `faculty`                VARCHAR(455)                                    DEFAULT NULL,
   `fieldOfStudy`           VARCHAR(455)                                    DEFAULT NULL,
   `modeOfStudy`            VARCHAR(45)                                     DEFAULT NULL,
-  `from`                   DATE                                            DEFAULT NULL,
+  `fromDate`                   DATE                                            DEFAULT NULL,
   `until`                  DATE                                            DEFAULT NULL,
   CONSTRAINT experience_id_uindex UNIQUE (id)
 );
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS user_experience
 
 
 
-`from`           TIMESTAMP                                        NULL,
+`fromDate`           TIMESTAMP                                        NULL,
   `until`          TIMESTAMP                                        NULL,
 
 

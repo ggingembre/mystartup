@@ -6,14 +6,14 @@ import javax.persistence.*;
  * Created by Maryna Kontar on 13.09.2017.
  * @KontarMaryna
  */
-//@Embeddable  ////можно сделать вложенную таблицу (убрать private long id)
+//@Embeddable  ////можно сделать вложенную таблицу (убрать private Long id)
 @Entity
 @Table(name = "contact")
 public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     //    @Email
     private String email;
     private String phoneNumber;
@@ -32,7 +32,7 @@ public class Contact {
         this.country = country;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
