@@ -1,3 +1,4 @@
+<jsp:useBean id="project" scope="request" class="ua.goit.entity.Project"/>
 <%--
   Created by IntelliJ IDEA.
   User: Guillaume Gingembre
