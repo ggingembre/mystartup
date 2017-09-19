@@ -5,5 +5,5 @@ package ua.goit.entity;
  * @KontarMaryna
  */
 public enum Country {
-    UKRAINE, FRANCE, POLAND, LIZUANIA
+    UKRAINE
 }

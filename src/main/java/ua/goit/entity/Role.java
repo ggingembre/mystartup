@@ -5,5 +5,5 @@ package ua.goit.entity;
  * @KontarMaryna
  */
 public enum Role {
-    ADMIN, INVESTOR, DEVELOPER;
+    ADMIN, INVESTOR, DEVELOPER
 }
