@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Table(name = "address")
 public class Address {
 
+
     @Id
     @GeneratedValue
     @Column(name = "address_id", updatable=false, nullable=false)

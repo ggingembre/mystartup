@@ -17,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "businessplans")
 public class BusinessPlan {
 
+
+    //Переименовать все поля согласно тому что сказал андрей и егор
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "businessplan_id", updatable=false, nullable=false)
