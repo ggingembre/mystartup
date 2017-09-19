@@ -15,7 +15,7 @@ import ua.goit.configuration.WebConfiguration;
 public class WebMvcApplication extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {ModelConfiguration.class, SpringSecurityConfiguration.class} ;//{,  }
+        return new Class[] {ModelConfiguration.class, SpringSecurityConfiguration.class} ;
     }
 
     @Override

@@ -25,13 +25,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user/show").hasAnyRole("DEVELOPER", "INVESTOR", "ADMIN")
-                .antMatchers("/project/show").hasAnyRole("DEVELOPER", "INVESTOR", "ADMIN")
-                .antMatchers("/businessplan/show").hasAnyRole("DEVELOPER", "INVESTOR", "ADMIN")
+
+                .antMatchers("/user/show").hasAnyRole("USER", "DEVELOPER", "INVESTOR", "ADMIN")
+                .antMatchers("/project/show").hasAnyRole("USER", "DEVELOPER", "INVESTOR", "ADMIN")
+                .antMatchers("/businessplan/show").hasAnyRole("USER", "DEVELOPER", "INVESTOR", "ADMIN")
                 .antMatchers("/user/**").hasRole("ADMIN")
                 .antMatchers("/project/**").hasRole("ADMIN")
                 .antMatchers("/businessplan/**").hasRole("ADMIN")
-                .antMatchers("/index.jsp").hasRole("ADMIN")
                 .anyRequest().denyAll()
                 .and().formLogin()
                 .and().csrf().disable();
@@ -44,5 +44,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .csrf().disable()
 
+//        .antMatchers("/login*").anonymous()
+//        .and()
+//                .formLogin()
+//                .loginPage("/login.html")
+//                .defaultSuccessUrl("/homepage.html")
+//                .failureUrl("/login.html?error=true")
+//                .and()
+//                .logout().logoutSuccessUrl("/login.html");
     }
 }

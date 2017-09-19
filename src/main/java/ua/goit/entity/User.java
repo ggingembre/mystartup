@@ -1,36 +1,54 @@
 package ua.goit.entity;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
  * Created by Maryna Kontar on 23.08.2017.
+ *
  * @KontarMaryna
  */
 @Entity
 @Table(name = "user")
 public class User {
 
+//для случая, если захотим хранить и id и NaturalId
+//    @Id
+//    Long id;
+//    @NaturalId
+
     @Id
     private String username;
     private String password;
-
     @OneToOne
     @JoinColumn(name = "contact_id")
     private Contact contact;
-
     private String profileFotoLink;
     private String personalPageFotoLink;
-
     private String youtubeLink;
     private String aboutMe;
 
+    //for bidirectional mapping
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @CollectionTable( name = "user_experience")
+//    @JoinTable(
+//            name = "user_experience",
+//            joinColumns = @JoinColumn(name = "user_username"),
+//            inverseJoinColumns = @JoinColumn(name = "experience_id"))
+    private Collection<Experience> experiences = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<Education> educations;
     private String skills;
 
-    @ElementCollection(targetClass=Role.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="user_roles")
-    @Column(name="role") // Column name in user_roles
+    @CollectionTable(name = "user_roles")
+    @Column(name = "role") // Column name in user_roles
     private Collection<Role> roles;
 
     public String getUsername() {
@@ -105,6 +123,21 @@ public class User {
         this.roles = roles;
     }
 
+    public Collection<Experience> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(Collection<Experience> experiences) {
+        this.experiences = experiences;
+    }
+
+    public Collection<Education> getEducations() {
+        return educations;
+    }
+
+    public void setEducations(Collection<Education> educations) {
+        this.educations = educations;
+    }
 
     @Override
     public String toString() {
