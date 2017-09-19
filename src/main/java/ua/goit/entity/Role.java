@@ -1,9 +1,10 @@
 package ua.goit.entity;
 
 /**
- * Created by Maryna Kontar on 23.08.2017.
+ * List of roles
  * @KontarMaryna
  */
 public enum Role {
-    ADMIN, INVESTOR, DEVELOPER
+    //TODO определиться с ролями
+    ADMIN, USER, INVESTOR, DEVELOPER
 }

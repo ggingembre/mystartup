@@ -44,5 +44,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .csrf().disable()
 
+//        .antMatchers("/login*").anonymous()
+//        .and()
+//                .formLogin()
+//                .loginPage("/login.html")
+//                .defaultSuccessUrl("/homepage.html")
+//                .failureUrl("/login.html?error=true")
+//                .and()
+//                .logout().logoutSuccessUrl("/login.html");
     }
 }

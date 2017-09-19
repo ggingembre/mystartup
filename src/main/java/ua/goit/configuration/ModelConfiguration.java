@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 /**
- * Main model application configuration.
+ * Main model application configuration. Uses Hibernate for data base management
  * @KontarMaryna
  */
 @Configuration
@@ -80,5 +80,4 @@ public class ModelConfiguration {
         initializer.setDatabasePopulator(populator);
         return initializer;
     }
-
 }

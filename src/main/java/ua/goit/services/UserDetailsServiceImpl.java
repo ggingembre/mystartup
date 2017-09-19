@@ -7,9 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ua.goit.entity.Contact;
-import ua.goit.entity.Role;
-import ua.goit.entity.User;
+import ua.goit.entity.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -113,6 +111,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         public Collection<Role> getRoles() {
             return user.getRoles();
+        }
+
+        public Collection<Experience> getExperiences() {
+            return user.getExperiences();
+        }
+
+        public Collection<Education> getEducations() {
+            return user.getEducations();
         }
 
         //TODO 5 Добавлять геттеры для всех новых полей, которые появятся в {@link ua.goit.entity.User}
