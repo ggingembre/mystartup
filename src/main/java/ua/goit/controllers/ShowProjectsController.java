@@ -50,24 +50,16 @@ public class ShowProjectsController {
     }
 
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    @ResponseStatus(value= HttpStatus.OK)
-    public ModelAndView showForm() {
-        //ModelAndView modelAndView = new ModelAndView();
-        //modelAndView.setViewName("projectRegistration");
-        //modelAndView.addObject(new Project());
-        //modelAndView.addObject("industries", Industry.values());
-        //return modelAndView;
-        return new ModelAndView("projectRegistration", "command", new Project());
+    @GetMapping("/add")
+    public String projectForm(Model model) {
+        model.addAttribute("projectRegistration", new Project());
+        //return new ModelAndView("projectRegistration", "command", new Project());
+        return "projectRegistration";
     }
 
-    @RequestMapping(value = "/show", method = RequestMethod.POST)
-    public String submit(@Valid @ModelAttribute("projectView")Project project,
-                         BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "projectInputError";
-        }
-
+    @PostMapping("/add")
+        public String ProjectSubmit(@ModelAttribute Project project){
+        /*
         model.addAttribute("projectName", project.getProjectName());
         model.addAttribute("projectIndustry", project.getProjectIndustry());
         model.addAttribute("projectAddress", project.getProjectAddress());
@@ -80,67 +72,13 @@ public class ShowProjectsController {
         model.addAttribute("projectPreviousRounds", project.getProjectPreviousRounds());
         model.addAttribute("projectLastChange", project.getProjectLastChange());
         //model.addAttribute("isActive", project.isActive());
+        */
 
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("projectView");
-        modelAndView.addObject("projectView", model);
-
-        return "projectView";
+        project.setActive(true);
+        project.setProjectLastChange(LocalDate.now());
+        projectsService.save(project);
+        return "projectResult";
     }
-
-    /*
-    // show user
-    @RequestMapping(value = "/showproject/{id}", method = RequestMethod.GET)
-    public ModelAndView showProject(@PathVariable("id") long id, Model model) {
-
-        //logger.debug("showUser() id: {}", id);
-
-        Project project = projectsService.findOne(id);
-        if (project == null) {
-            model.addAttribute("css", "danger");
-            model.addAttribute("msg", "User not found");
-        }
-        model.addAttribute("project", project);
-
-        return model;
-
-    } */
-
-    /*@RequestMapping(value = "/add", method = RequestMethod.GET)
-    @ResponseStatus(value= HttpStatus.OK)
-    public ModelAndView showForm() {
-        //ModelAndView modelAndView = new ModelAndView();
-        //modelAndView.setViewName("projectRegistration");
-        //modelAndView.addObject(new Project());
-        //modelAndView.addObject("industries", Industry.values());
-        //return modelAndView;
-        return new ModelAndView("projectRegistration", "command", new Project());
-    }
-
-    @RequestMapping(value = "/show", method = RequestMethod.POST)
-    public String submit(@Valid @ModelAttribute("projectView")Project project,
-                         BindingResult result, ModelMap model) {
-        if (result.hasErrors()) {
-            return "projectInputError";
-        }
-
-        model.addAttribute("projectName", project.getProjectName());
-        model.addAttribute("projectIndustry", project.getProjectIndustry());
-        model.addAttribute("projectAddress", project.getProjectAddress());
-        model.addAttribute("projectDescription", project.getProjectDescription());
-        model.addAttribute("projectSiteLink", project.getProjectSiteLink());
-        model.addAttribute("projectExpectedRaise", project.getProjectExpectedRaise());
-        model.addAttribute("projectAmountRaised", project.getProjectAmountRaised());
-        model.addAttribute("ProjectMinInv", project.getProjectMinInv());
-        model.addAttribute("projectReturn", project.getProjectReturn());
-        model.addAttribute("projectPreviousRounds", project.getProjectPreviousRounds());
-        model.addAttribute("projectLastChange", project.getProjectLastChange());
-        //model.addAttribute("isActive", project.isActive());
-        return "projectView";
-    }*/
-
-
 
 /*
     @PostConstruct

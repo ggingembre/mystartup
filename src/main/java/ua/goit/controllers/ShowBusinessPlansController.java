@@ -49,6 +49,7 @@ public class ShowBusinessPlansController {
         return modelAndView;
     }
 
+    /*
 
     @PostConstruct
     public void initDefaultBusinessPlans() {
@@ -102,7 +103,7 @@ public class ShowBusinessPlansController {
 
         System.out.println("success!");
 
-    }
+    } */
 
 
 

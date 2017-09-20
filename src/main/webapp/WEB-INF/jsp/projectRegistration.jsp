@@ -7,6 +7,7 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id = "project" class = "ua.goit.entity.Project" scope = "session" />
 <html>
 <head>
     <title>Sample Form</title>
@@ -27,10 +28,10 @@
     <h2>Welcome, please enter your project details!</h2>
     <c:if test="${not empty message}"><div class="message green">${message}</div></c:if>
 
-    <form:form method="POST" action="/project/add" modelAttribute="project" commandName="command">
+    <form:form method="POST" action="/project/add" modelAttribute="projectRegistration"> <%--commandName="command"--%>
 
         <label for="projectNameInput">Project Name: </label>
-        <form:input path="ProjectName" id="projectNameInput" />
+        <form:input path="projectName" id="projectNameInput" />
         <br/>
 
         <label for="industrySelect">Project Industy:</label>
@@ -43,25 +44,24 @@
         <br/>
 
         <label for="projectDescriptionInput">Project Description: </label>
-        <form:input path="ProjectDescription" name="projectDescriptionInput" />
+        <form:input path="projectDescription" name="projectDescriptionInput" />
         <br/>
 
         <label for="projectSiteLinkInput">Project Site: </label>
-        <form:input path="ProjectSiteLink" name="projectSiteLinkInput" />
+        <form:input path="projectSiteLink" name="projectSiteLinkInput" />
         <br/>
 
         <label for="projectExpectedRaiseInput">Expected amount to be raised: </label>
-        <form:input path="ProjectExpectedRaise" name="projectExpectedRaiseInput" />
+        <form:input path="projectExpectedRaise" name="projectExpectedRaiseInput" />
         <br/>
 
         <label for="projectAmountRaisedInput">Amount Already Raised: </label>
-        <form:input path="ProjectAmountRaised" name="projectAmountRaisedInput" />
+        <form:input path="projectAmountRaised" name="projectAmountRaisedInput" />
         <br/>
 
         <label for="projectMinInvInput">Minimum Investment: </label>
-        <form:input path="ProjectMinInv" name="projectMinInvInput" />
+        <form:input path="projectMinInv" name="projectMinInvInput" />
         <br/>
-
 
         <label for="projectReturnInput">Project Return: </label>
         <form:input path="projectReturn" name="projectReturnInput" />
