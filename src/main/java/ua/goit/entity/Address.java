@@ -34,6 +34,28 @@ public class Address {
         this.country = country;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+
+        Address address = (Address) o;
+
+        if (addressId != address.addressId) return false;
+        if (!town.equals(address.town)) return false;
+        if (region != address.region) return false;
+        return country == address.country;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (addressId ^ (addressId >>> 32));
+        result = 31 * result + town.hashCode();
+        result = 31 * result + region.hashCode();
+        result = 31 * result + country.hashCode();
+        return result;
+    }
+
     public long getAddressId() {
         return addressId;
     }

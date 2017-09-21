@@ -1,5 +1,7 @@
 package ua.goit.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.goit.dao.AddressDao;
 import ua.goit.dao.ProjectDao;
 import ua.goit.entity.*;
+import ua.goit.services.AddressService;
 import ua.goit.services.BusinessPlanService;
 import ua.goit.services.ProjectService;
 
@@ -27,6 +30,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/businessplan")
+@Transactional
 public class ShowBusinessPlansController {
 
     private final BusinessPlanService businessPlansService;
@@ -37,10 +41,10 @@ public class ShowBusinessPlansController {
     }
 
     @Autowired
-    private ProjectDao projectDao;
+    private ProjectService projectService;
 
     @Autowired
-    private AddressDao addressDao;
+    private AddressService addressService;
 
     @ModelAttribute("regions")
     public Region[] regions() {
@@ -71,14 +75,16 @@ public class ShowBusinessPlansController {
     public String BusinessPlanSubmit(@ModelAttribute BusinessPlanRegistrationForm businessPlanRegistrationForm){
 
         // saving address
-        Address address = new Address();
+        Address address = businessPlanRegistrationForm.getAddress();
 
-        address.setAddressId(businessPlanRegistrationForm.getAddress().getAddressId());
-        address.setCountry(businessPlanRegistrationForm.getAddress().getCountry());
-        address.setRegion(businessPlanRegistrationForm.getAddress().getRegion());
-        address.setTown(businessPlanRegistrationForm.getAddress().getTown());
+        // here, if I do address = businessPlanRegistrationForm.getAddress(), it does not work
 
-        addressDao.saveAndFlush(address);
+        //address.setAddressId(businessPlanRegistrationForm.getAddress().getAddressId());
+        //address.setCountry(businessPlanRegistrationForm.getAddress().getCountry());
+        //address.setRegion(businessPlanRegistrationForm.getAddress().getRegion());
+        //address.setTown(businessPlanRegistrationForm.getAddress().getTown());
+
+        addressService.save(address);
 
         // saving business plan
         BusinessPlan businessPlan = businessPlanRegistrationForm.getBusinessPlan();
@@ -88,9 +94,9 @@ public class ShowBusinessPlansController {
         businessPlansService.save(businessPlan);
 
         //adding to project
-        //Project project = projectDao.getOne(businessPlan.getProjectId());
-        //project.getBusinessPlans().add(businessPlan);
-        //projectDao.saveAndFlush(project);
+        Project project = projectService.findOne(businessPlan.getProjectId());
+        project.getBusinessPlans().add(businessPlan);
+        projectService.save(project);
 
         return "businessPlanResult";
     }

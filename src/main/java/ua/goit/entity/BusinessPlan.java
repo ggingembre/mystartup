@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Created by Guillaume Gingembre on 14/09/2017.

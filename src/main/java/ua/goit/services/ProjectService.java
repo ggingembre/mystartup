@@ -31,7 +31,7 @@ public class ProjectService {
         return dao.findAll();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional // (readOnly = true)
     public Project findOne(Long s) {
         return dao.findOne(s);
     }

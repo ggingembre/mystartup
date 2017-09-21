@@ -1,7 +1,9 @@
 package ua.goit.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -235,23 +237,6 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" +
-                "projectId=" + projectId +
-                "\nprojectName='" + projectName +
-                "\nprojectIndustry=" + projectIndustry +
-                "\nprojectAddress=" + projectAddress +
-                "\nprojectDescription='" + projectDescription + '\'' +
-                ", logoLink='" + logoLink + '\'' +
-                ", projectDocLink='" + projectDocLink + '\'' +
-                ", projectSiteLink='" + projectSiteLink + '\'' +
-                ", projectExpectedRaise=" + projectExpectedRaise +
-                ", projectAmountRaised=" + projectAmountRaised +
-                ", projectMinInv=" + projectMinInv +
-                ", projectReturn=" + projectReturn +
-                ", projectLastChange=" + projectLastChange +
-                ", isActive=" + isActive +
-                ", projectPreviousRounds=" + projectPreviousRounds +
-                //", businessPlans=" + Arrays.toString(businessPlans.toArray()) +
-                '}';
+        return "";
     }
 }
