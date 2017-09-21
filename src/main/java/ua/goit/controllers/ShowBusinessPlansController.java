@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.goit.dao.AddressDao;
 import ua.goit.dao.ProjectDao;
 import ua.goit.entity.*;
 import ua.goit.services.BusinessPlanService;
@@ -37,7 +38,17 @@ public class ShowBusinessPlansController {
 
     @Autowired
     private ProjectDao projectDao;
-    //private ProjectService projectService;
+
+    @Autowired
+    private AddressDao addressDao;
+
+    @ModelAttribute("regions")
+    public Region[] regions() {
+        return Region.values();
+    }
+
+    @ModelAttribute("countries")
+    public Country[] countries() { return Country.values(); }
 
     @RequestMapping(method = RequestMethod.GET, value = "/show")
     public ModelAndView showBusinessPlans() {
@@ -51,17 +62,23 @@ public class ShowBusinessPlansController {
 
     @GetMapping("/add")
     public String businessPlanForm(Model model) {
-        model.addAttribute("businessPlanRegistration", new BusinessPlan());
+        model.addAttribute("businessPlanRegistration", new BusinessPlanRegistrationForm());
+        //model.addAttribute("businessPlanRegistration", new Address());
         return "businessPlanRegistration";
     }
 
     @PostMapping("/add")
-    public String BusinessPlanSubmit(@ModelAttribute BusinessPlan businessPlan){
+    public String BusinessPlanSubmit(@ModelAttribute BusinessPlanRegistrationForm businessPlanRegistrationForm){
+
+        // saving address
+        Address address = businessPlanRegistrationForm.getBusinessPlan().getAddress();
+        addressDao.saveAndFlush(address);
 
         // saving business plan
-        businessPlan.setBusinessPlanLastChange(LocalDate.now());
-        businessPlan.setActive(true);
-        businessPlansService.save(businessPlan);
+        businessPlanRegistrationForm.getBusinessPlan().setAddress(address);
+        businessPlanRegistrationForm.getBusinessPlan().setBusinessPlanLastChange(LocalDate.now());
+        businessPlanRegistrationForm.getBusinessPlan().setActive(true);
+        businessPlansService.save(businessPlanRegistrationForm.getBusinessPlan());
 
         //adding to project
         //Project project = projectDao.getOne(businessPlan.getProjectId());
