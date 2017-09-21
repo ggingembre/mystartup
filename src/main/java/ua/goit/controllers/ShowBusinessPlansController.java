@@ -3,8 +3,8 @@ package ua.goit.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.dao.ProjectDao;
 import ua.goit.entity.*;
@@ -49,8 +49,29 @@ public class ShowBusinessPlansController {
         return modelAndView;
     }
 
-    /*
+    @GetMapping("/add")
+    public String businessPlanForm(Model model) {
+        model.addAttribute("businessPlanRegistration", new BusinessPlan());
+        return "businessPlanRegistration";
+    }
 
+    @PostMapping("/add")
+    public String BusinessPlanSubmit(@ModelAttribute BusinessPlan businessPlan){
+
+        // saving business plan
+        businessPlan.setBusinessPlanLastChange(LocalDate.now());
+        businessPlan.setActive(true);
+        businessPlansService.save(businessPlan);
+
+        //adding to project
+        //Project project = projectDao.getOne(businessPlan.getProjectId());
+        //project.getBusinessPlans().add(businessPlan);
+        //projectDao.saveAndFlush(project);
+
+        return "businessPlanResult";
+    }
+
+    /*
     @PostConstruct
     public void initDefaultBusinessPlans() {
 
@@ -97,15 +118,12 @@ public class ShowBusinessPlansController {
         project2.getBusinessPlans().add(businessplan1);
         projectDao.saveAndFlush(project2);
 
-        Project project3 = projectDao.findOne(Long.valueOf(3));
+        Project project3 = projectDao.findOne(Long.valueOf(23));
         project3.getBusinessPlans().add(businessPlan2);
         projectDao.saveAndFlush(project3);
 
         System.out.println("success!");
 
     } */
-
-
-
 
 }

@@ -7,7 +7,7 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id = "project" class = "ua.goit.entity.Project" scope = "session" />
+<jsp:useBean id = "project" class = "ua.goit.entity.Project" scope = "request" />
 <html>
 <head>
     <title>Sample Form</title>
@@ -25,7 +25,7 @@
 <body>
 <div id="container">
 
-    <h2>Welcome, please enter your project details!</h2>
+    <h2>Please enter your project details</h2>
     <c:if test="${not empty message}"><div class="message green">${message}</div></c:if>
 
     <form:form method="POST" action="/project/add" modelAttribute="projectRegistration"> <%--commandName="command"--%>
