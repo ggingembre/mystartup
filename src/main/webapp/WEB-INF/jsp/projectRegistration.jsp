@@ -10,7 +10,7 @@
 <jsp:useBean id = "project" class = "ua.goit.entity.Project" scope = "request" />
 <html>
 <head>
-    <title>Sample Form</title>
+    <title>Project Registration</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style>
         body { background-color: #eee;}
