@@ -27,7 +27,7 @@ public class BusinessPlan {
     @Column(name = "project_id")
     private long projectId;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Address address;
 
     @Column(name = "idea")

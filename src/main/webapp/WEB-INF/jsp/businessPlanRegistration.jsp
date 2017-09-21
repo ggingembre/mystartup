@@ -49,7 +49,7 @@
 
         <label for="countrySelect">Country: </label>
         <form:select path="address.country" id="countrySelect">
-            <form:option value="">Select Region: </form:option>
+            <form:option value="">Select Country: </form:option>
             <c:forEach items="${countries}" var="frequency">
                 <form:option value="${frequency}">${frequency}</form:option>
             </c:forEach>

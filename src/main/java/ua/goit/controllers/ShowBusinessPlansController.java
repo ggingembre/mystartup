@@ -71,14 +71,21 @@ public class ShowBusinessPlansController {
     public String BusinessPlanSubmit(@ModelAttribute BusinessPlanRegistrationForm businessPlanRegistrationForm){
 
         // saving address
-        Address address = businessPlanRegistrationForm.getBusinessPlan().getAddress();
+        Address address = new Address();
+
+        address.setAddressId(businessPlanRegistrationForm.getAddress().getAddressId());
+        address.setCountry(businessPlanRegistrationForm.getAddress().getCountry());
+        address.setRegion(businessPlanRegistrationForm.getAddress().getRegion());
+        address.setTown(businessPlanRegistrationForm.getAddress().getTown());
+
         addressDao.saveAndFlush(address);
 
         // saving business plan
-        businessPlanRegistrationForm.getBusinessPlan().setAddress(address);
-        businessPlanRegistrationForm.getBusinessPlan().setBusinessPlanLastChange(LocalDate.now());
-        businessPlanRegistrationForm.getBusinessPlan().setActive(true);
-        businessPlansService.save(businessPlanRegistrationForm.getBusinessPlan());
+        BusinessPlan businessPlan = businessPlanRegistrationForm.getBusinessPlan();
+        businessPlan.setAddress(address);
+        businessPlan.setBusinessPlanLastChange(LocalDate.now());
+        businessPlan.setActive(true);
+        businessPlansService.save(businessPlan);
 
         //adding to project
         //Project project = projectDao.getOne(businessPlan.getProjectId());
