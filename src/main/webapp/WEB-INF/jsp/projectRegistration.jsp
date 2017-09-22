@@ -7,7 +7,7 @@
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id = "project" class = "ua.goit.entity.Project" scope = "request" />
+<jsp:useBean id = "projectRegistrationForm" class = "ua.goit.entity.ProjectRegistrationForm" scope = "request" />
 <html>
 <head>
     <title>Project Registration</title>
@@ -26,16 +26,37 @@
 <div id="container">
 
     <h2>Please enter your project details</h2>
-    <c:if test="${not empty message}"><div class="message green">${message}</div></c:if>
 
     <form:form method="POST" action="/project/add" modelAttribute="projectRegistration"> <%--commandName="command"--%>
 
         <label for="projectNameInput">Project Name: </label>
-        <form:input path="projectName" id="projectNameInput" />
+        <form:input path="project.projectName" id="projectNameInput" />
+        <br/>
+
+        <label for="addressTownInput">Town: </label>
+        <form:input path="address.town" id="addressTownInput" />
+        <br/>
+
+        <label for="regionSelect">Region: </label>
+        <form:select path="address.region" id="regionSelect">
+            <form:option value="">Select Region: </form:option>
+            <c:forEach items="${regions}" var="frequency">
+                <form:option value="${frequency}">${frequency}</form:option>
+            </c:forEach>
+        </form:select>
+        <br/>
+
+        <label for="countrySelect">Country: </label>
+        <form:select path="address.country" id="countrySelect">
+            <form:option value="">Select Country: </form:option>
+            <c:forEach items="${countries}" var="frequency">
+                <form:option value="${frequency}">${frequency}</form:option>
+            </c:forEach>
+        </form:select>
         <br/>
 
         <label for="industrySelect">Project Industy:</label>
-            <form:select path="projectIndustry" id="industrySelect">
+            <form:select path="project.projectIndustry" id="industrySelect">
                 <form:option value="">Select Project Industry: </form:option>
                 <c:forEach items="${industries}" var="frequency">
                     <form:option value="${frequency}">${frequency}</form:option>
@@ -44,32 +65,32 @@
         <br/>
 
         <label for="projectDescriptionInput">Project Description: </label>
-        <form:input path="projectDescription" name="projectDescriptionInput" />
+        <form:input path="project.projectDescription" name="projectDescriptionInput" />
         <br/>
 
         <label for="projectSiteLinkInput">Project Site: </label>
-        <form:input path="projectSiteLink" name="projectSiteLinkInput" />
+        <form:input path="project.projectSiteLink" name="projectSiteLinkInput" />
         <br/>
 
         <label for="projectExpectedRaiseInput">Expected amount to be raised: </label>
-        <form:input path="projectExpectedRaise" name="projectExpectedRaiseInput" />
+        <form:input path="project.projectExpectedRaise" name="projectExpectedRaiseInput" />
         <br/>
 
         <label for="projectAmountRaisedInput">Amount Already Raised: </label>
-        <form:input path="projectAmountRaised" name="projectAmountRaisedInput" />
+        <form:input path="project.projectAmountRaised" name="projectAmountRaisedInput" />
         <br/>
 
         <label for="projectMinInvInput">Minimum Investment: </label>
-        <form:input path="projectMinInv" name="projectMinInvInput" />
+        <form:input path="project.projectMinInv" name="projectMinInvInput" />
         <br/>
 
         <label for="projectReturnInput">Project Return: </label>
-        <form:input path="projectReturn" name="projectReturnInput" />
+        <form:input path="project.projectReturn" name="projectReturnInput" />
         <br/>
 
 
         <label for="projectPreviousRoundsInput">Money raised during previous rounds: </label>
-        <form:input path="projectPreviousRounds" name="projectPreviousRoundsInput" />
+        <form:input path="project.projectPreviousRounds" name="projectPreviousRoundsInput" />
         <br/>
 
         <br/>

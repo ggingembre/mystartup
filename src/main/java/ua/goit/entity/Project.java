@@ -31,7 +31,7 @@ public class Project {
     @Column(name = "project_industry") // do enum of 10 industries - done!
     private Industry projectIndustry;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) // do a class address - done!
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE) // do a class address - done!
     private Address projectAddress;
 
     @Column(name = "project_description")

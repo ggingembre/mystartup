@@ -8,6 +8,7 @@
   scope="request"
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="projectRegistrationForm" scope="request" class="ua.goit.entity.ProjectRegistrationForm"/>
 
 <html>
 <head>
@@ -16,21 +17,59 @@
 </head>
 <body>
 
-<h3>Congratulations, the following project has been created ! </h3
+<p>You have successfully registered the following project: </p>
+    <table>
+                <tr>
+                    <td>Project Name :</td>
+                    <td>${projectRegistrationForm.project.projectName}</td>
+                </tr>
+                <tr>
+                    <td>Project Industry :</td>
+                    <td>${projectRegistrationForm.project.projectIndustry}</td>
+                </tr>
+                <tr>
+                    <td>Town :</td>
+                    <td>${projectRegistrationForm.address.town}</td>
+                </tr>
+                <tr>
+                    <td>Region :</td>
+                    <td>${projectRegistrationForm.address.region}</td>
+                </tr>
+                <tr>
+                    <td>Country :</td>
+                    <td>${projectRegistrationForm.address.country}</td>
+                </tr>
+                <tr>
+                    <td>Project Description :</td>
+                    <td>${projectRegistrationForm.project.projectDescription}</td>
+                </tr>
+                <tr>
+                    <td>Project Website :</td>
+                    <td>${projectRegistrationForm.project.projectSiteLink}</td>
+                </tr>
+                <tr>
+                    <td>Project Expected Raise :</td>
+                    <td>${projectRegistrationForm.project.projectExpectedRaise}</td>
+                </tr>
+                <tr>
+                    <td>Amount Already Raised :</td>
+                    <td>${projectRegistrationForm.project.projectAmountRaised}</td>
+                </tr>
+                <tr>
+                    <td>Minimum Investment :</td>
+                    <td>${projectRegistrationForm.project.projectMinInv}</td>
+                </tr>
+                <tr>
+                    <td>Project Return :</td>
+                    <td>${projectRegistrationForm.project.projectReturn}</td>
+                </tr>
+                <tr>
+                    <td>Last Changed :</td>
+                    <td>${projectRegistrationForm.project.projectLastChange}</td>
+                </tr>
 
-<%@ include file="projectView.jsp"  %>
-
-<%--
-<p th:text="'Project id: ' + ${project.projectId}" />
-<p th:text="'Project Name: ' + ${project.projectName}" />
-<p th:text="'Project Industry: ' + ${project.projectIndustry}" />
-<p th:text="'Project Description: ' + ${project.projectDescription}" />
-<p th:text="'Project Website: ' + ${project.projectSiteLink}" />
-<p th:text="'Project Expected Raise: ' + ${project.projectExpectedRaise}" />
-<p th:text="'Project Amount Already Raised: ' + ${project.projectAmountRaised}" />
-<p th:text="'Minimum Investment: ' + ${project.projectMinInv}" />
-<p th:text="'Expected Return: ' + ${project.projectReturn}" />
-<p th:text="'Previous Rounds: ' + ${project.projectPreviousRounds}" /> --%>
+    </table>
+<br/>
 
 <a href="/project/add">Submit another project</a>
 

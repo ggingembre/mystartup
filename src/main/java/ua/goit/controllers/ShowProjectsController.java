@@ -3,12 +3,14 @@ package ua.goit.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.goit.entity.*;
+import ua.goit.services.AddressService;
 import ua.goit.services.ProjectService;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/project")
+@Transactional
 public class ShowProjectsController {
 
     private final ProjectService projectsService;
@@ -33,6 +36,17 @@ public class ShowProjectsController {
     public ShowProjectsController(ProjectService projectsService) {
         this.projectsService = projectsService;
     }
+
+    @Autowired
+    private AddressService addressService;
+
+    @ModelAttribute("regions")
+    public Region[] regions() {
+        return Region.values();
+    }
+
+    @ModelAttribute("countries")
+    public Country[] countries() { return Country.values(); }
 
     @ModelAttribute("industries")
     public Industry[] industries() {
@@ -52,13 +66,13 @@ public class ShowProjectsController {
 
     @GetMapping("/add")
     public String projectForm(Model model) {
-        model.addAttribute("projectRegistration", new Project());
+        model.addAttribute("projectRegistration", new ProjectRegistrationForm());
         //return new ModelAndView("projectRegistration", "command", new Project());
         return "projectRegistration";
     }
 
     @PostMapping("/add")
-        public String ProjectSubmit(@ModelAttribute Project project){
+        public String ProjectSubmit(@ModelAttribute ProjectRegistrationForm projectRegistrationForm){
         /*
         model.addAttribute("projectName", project.getProjectName());
         model.addAttribute("projectIndustry", project.getProjectIndustry());
@@ -74,6 +88,13 @@ public class ShowProjectsController {
         //model.addAttribute("isActive", project.isActive());
         */
 
+        // save address
+        Address address = projectRegistrationForm.getAddress();
+        addressService.save(address);
+
+        Project project = projectRegistrationForm.getProject();
+
+        project.setProjectAddress(address);
         project.setActive(true);
         project.setProjectLastChange(LocalDate.now());
         projectsService.save(project);
