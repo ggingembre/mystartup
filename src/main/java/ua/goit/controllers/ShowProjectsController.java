@@ -66,9 +66,19 @@ public class ShowProjectsController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/{projectId}") //, method=RequestMethod.GET)
+    public ModelAndView showProject(@PathVariable long projectId) {
+
+        Project project = projectsService.findOne(projectId);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("projectView");
+        modelAndView.addObject("project", project);
+        return modelAndView;
+    }
+
 
     @GetMapping("/add")
-    public String projectForm(Model model, HttpSession session) {
+    public String projectForm(Model model) {
         model.addAttribute("projectRegistration", new ProjectRegistrationForm());
         //return new ModelAndView("projectRegistration", "command", new Project());
         return "projectRegistration";

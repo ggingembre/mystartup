@@ -59,9 +59,8 @@
                         <td class="tb1" style="width:60%">${project.projectMinInv}</td>
                     </tr>
                     <tr>
-                        <td class="tb2" style="width:50%"> <a href="/project/add">Learn more about project</a> </td>
+                        <td class="tb2" style="width:50%"> <a href="/project/${project.projectId}">Learn more about project</a> </td>
                     </tr>
-
             </div>
         </table>
 

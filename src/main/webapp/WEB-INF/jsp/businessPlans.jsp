@@ -61,10 +61,12 @@
                         <td class="tb1" style="width:60%">${businessPlan.businessPlanLastChange}</td>
                     </tr>
                 <tr>
-                    <td class="tb2" style="width:50%"> <a href="/businessplan/add">Learn more about it</a> </td>
+                    <td class="tb2" style="width:50%"> <a href="/businessplan/${businessPlan.businessplan_id}">Learn more about it</a> </td>
                 </tr>
             </div>
                 </table>
+            <br>
+            <br>
         </div>
     </c:forEach>
 

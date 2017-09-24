@@ -58,8 +58,13 @@ public class ProjectService {
     }
 
     @Transactional // (readOnly = true)
+    public Project findById(Long s) {
+        return dao.findByProjectId( s);
+    }
+
+    @Transactional // (readOnly = true)
     public Project findOne(Long s) {
-        return dao.findOne(s);
+        return dao.findOne( s);
     }
 
     @Transactional(readOnly = true)

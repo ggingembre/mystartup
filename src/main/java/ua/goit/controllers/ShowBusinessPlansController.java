@@ -65,6 +65,15 @@ public class ShowBusinessPlansController {
         return modelAndView;
     }
 
+    @RequestMapping(value="/{businessPlanId}") //, method=RequestMethod.GET)
+    public String showProject(Model model, @PathVariable long businessPlanId) {
+
+        BusinessPlan businessPlan = businessPlansService.findOne(businessPlanId);
+        model.addAttribute("businessPlan", businessPlan);
+
+        return "businessPlanView";
+    }
+
     @GetMapping("/add")
     public String businessPlanForm(Model model) {
         model.addAttribute("businessPlanRegistration", new BusinessPlanRegistrationForm());

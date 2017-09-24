@@ -2,9 +2,13 @@ package ua.goit.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.entity.Project;
+
+import java.io.Serializable;
+import java.lang.invoke.SerializedLambda;
 
 
 /**
@@ -15,7 +19,8 @@ import ua.goit.entity.Project;
  * Data access object for {@link Project}
  */
 
-public interface ProjectDao extends JpaRepository<Project, Long>, JpaSpecificationExecutor<Project> {
+@EnableJpaRepositories(basePackages = "com.acme.repositories.jpa")
+public interface ProjectDao extends JpaRepository<Project, Long> {
 
     /*Project findByName(String name);
     List<Project> findByIndustry(String industry);
@@ -23,5 +28,8 @@ public interface ProjectDao extends JpaRepository<Project, Long>, JpaSpecificati
     List<Project> findByInvSize(long invSize);
     List<Project> findByMinIrr(long minIrr);
     List<Project> findActive();*/
+
+    Project findByProjectId(long id);
+
 
 }
