@@ -1,6 +1,7 @@
 package ua.goit.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.entity.Project;
@@ -14,7 +15,7 @@ import ua.goit.entity.Project;
  * Data access object for {@link Project}
  */
 
-public interface ProjectDao extends JpaRepository<Project, Long>{
+public interface ProjectDao extends JpaRepository<Project, Long>, JpaSpecificationExecutor<Project> {
 
     /*Project findByName(String name);
     List<Project> findByIndustry(String industry);

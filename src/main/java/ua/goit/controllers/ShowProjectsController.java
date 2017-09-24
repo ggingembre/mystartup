@@ -1,5 +1,6 @@
 package ua.goit.controllers;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import ua.goit.services.AddressService;
 import ua.goit.services.ProjectService;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -55,17 +57,18 @@ public class ShowProjectsController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/showAll")
     public ModelAndView showProjects() {
-        List<String> projectnames =
-                projectsService.findAll().stream().map(Project::toString).collect(Collectors.toList());
+        /*List<String> projectnames =
+                projectsService.findAll().stream().map(Project::toString).collect(Collectors.toList()); */
+        List<Project> projects = projectsService.findAll();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("projects");
-        modelAndView.addObject("projects", projectnames);
+        modelAndView.addObject("projects", projects);
         return modelAndView;
     }
 
 
     @GetMapping("/add")
-    public String projectForm(Model model) {
+    public String projectForm(Model model, HttpSession session) {
         model.addAttribute("projectRegistration", new ProjectRegistrationForm());
         //return new ModelAndView("projectRegistration", "command", new Project());
         return "projectRegistration";
@@ -93,6 +96,8 @@ public class ShowProjectsController {
         addressService.save(address);
 
         Project project = projectRegistrationForm.getProject();
+
+        System.out.println("User:" + projectRegistrationForm.getUser().getUsername());
 
         project.setProjectAddress(address);
         project.setActive(true);

@@ -54,13 +54,14 @@ public class ShowBusinessPlansController {
     @ModelAttribute("countries")
     public Country[] countries() { return Country.values(); }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/show")
+    @RequestMapping(method = RequestMethod.GET, value = "/showAll")
     public ModelAndView showBusinessPlans() {
-        List<String> businessPlanNames =
-                businessPlansService.findAll().stream().map(BusinessPlan::toString).collect(Collectors.toList());
+        //List<String> businessPlanNames =
+          //      businessPlansService.findAll().stream().map(BusinessPlan::toString).collect(Collectors.toList());
+        List<BusinessPlan> businessPlans = businessPlansService.findAll();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("businessPlans");
-        modelAndView.addObject("businessPlans", businessPlanNames);
+        modelAndView.addObject("businessPlans", businessPlans);
         return modelAndView;
     }
 
