@@ -17,7 +17,7 @@
 <html>
 <head>
     <title>Projects list</title>
-    <link href="../../resources/theme1/style.css" type="text/css" rel="stylesheet">
+    <link href="../../resources/theme1/style1.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -64,8 +64,6 @@
 
             </div>
         </table>
-
-
 
         <br>
         <br>
