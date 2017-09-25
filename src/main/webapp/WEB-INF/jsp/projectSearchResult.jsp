@@ -1,14 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: Guillaume Gingembre
-  Date: 15/09/2017
-  Time: 07:45
+  Date: 25/09/2017
+  Time: 23:22
   To change this template use File | Settings | File Templates.
-
-  <div class="second">
-                    ${project}
-            </div>
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -22,10 +25,10 @@
 
 <body>
 
-    <c:forEach var="project" items="${projects}">
-    <div class="first" style="float: left; width:27%; margin:0.5%; box-shadow: 10px 10px 5px grey; background-color: #f1f1f1">
-        <table>
-            <div class="second" style="height:80px" >
+<c:forEach var="project" items="${projects}">
+<div class="first" style="float: left; width:27%; margin:0.5%; box-shadow: 10px 10px 5px grey; background-color: #f1f1f1">
+    <table>
+        <div class="second" style="height:80px" >
                     <tr>
                         <td class="tb1" style="width:30%">Project Name :</td>
                         <td class="tb1" style="width:60%">${project.projectName}</td>
@@ -54,27 +57,37 @@
                         <td class="tb1" style="width:30%">Expected Return :</td>
                         <td class="tb1" style="width:60%">${project.projectReturn}</td>
                     </tr>
-                    <tr>
+                <tr>
                         <td class="tb1" style="width:30%">Minimum Investment :</td>
                         <td class="tb1" style="width:60%">${project.projectMinInv}</td>
                     </tr>
-                        <tr>
-                            <td class="tb1" style="width:30%">Project Expected Raise :</td>
-                            <td class="tb1" style="width:60%">${project.projectExpectedRaise}</td>
-                        </tr>
-                    <tr>
-                        <td class="tb2" style="width:50%"> <a href="/project/${project.projectId}">Learn more about project</a> </td>
-                    </tr>
-            </div>
-        </table>
+                    <tr>
+                        <td class="tb1" style="width:30%">Project Expected Raise :</td>
+                        <td class="tb1" style="width:60%">${project.projectExpectedRaise}</td>
+                    </tr>
+            <tr>
+                <td class="tb2" style="width:50%"> <a href="/project/${project.projectId}">Learn more about project</a> </td>
+            </tr>
+        </div>
+    </table>
+    <br>
 
-        <br>
-        <br>
+</div>
 
-    </div>
+</c:forEach>
 
-    </c:forEach>
+<table>
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="javascript:history.go(-1)">Edit your criteria</a> </td>
+    </tr>
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="/project/search">New Search</a> </td>
+    </tr>
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="/project/showAll">Show all projects</a> </td>
+    </tr>
+</table>
+<br>
 
-
- </body>
- </html>
+</body>
+</html>

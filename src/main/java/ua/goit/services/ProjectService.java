@@ -3,6 +3,7 @@ package ua.goit.services;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.hibernate.criterion.Expression;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import ua.goit.dao.ProjectDao;
 import ua.goit.entity.Project;
 import ua.goit.entity.Region;
@@ -35,6 +38,12 @@ public class ProjectService {
         this.dao = dao;
     }
 
+    // adding this to turn empty strings ("") to null, useful for queries
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+
     @Transactional
     public <S extends Project> S save(S s) {
         return dao.save(s);
@@ -43,9 +52,18 @@ public class ProjectService {
     @Transactional(readOnly = true)
     public List<Project> findAllExample (Project project) {
 
+        if (project.getProjectAddress().getTown().isEmpty()) {
+            project.getProjectAddress().setTown(null);
+        }
+
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreNullValues()
-                .withIgnoreCase();
+                .withIgnoreCase()
+                .withIgnorePaths("projectId", "businessPlans", "projectAddress.addressId", "projectLastChange", "isActive")
+                .withIgnorePaths("projectExpectedRaise", "projectAmountRaised", "projectMinInv", "projectReturn");
+                //    .withMatcher("projectAmountRaised", IsMoreThan(Long.parseLong()));
+        // ignore numbers, because I did not find how to deal with ExampleMatcher and numbers
+        // I will write my own logic about numbers in the controller, but it is an area of improvement for this code
 
         Example<Project> example = Example.of(project, matcher);
 

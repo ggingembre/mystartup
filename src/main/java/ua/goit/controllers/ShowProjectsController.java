@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,7 +77,6 @@ public class ShowProjectsController {
         return modelAndView;
     }
 
-
     @GetMapping("/add")
     public String projectForm(Model model) {
         model.addAttribute("projectRegistration", new ProjectRegistrationForm());
@@ -115,6 +115,45 @@ public class ShowProjectsController {
         projectsService.save(project);
         return "projectResult";
     }
+
+    @GetMapping("/search")
+    public String projectSearch(Model model) {
+        model.addAttribute("projectSearch", new ProjectRegistrationForm());
+        //return new ModelAndView("projectRegistration", "command", new Project());
+        return "projectSearch";
+    }
+
+    @PostMapping("/search")
+    public ModelAndView SearchResults(@ModelAttribute ProjectRegistrationForm projectRegistrationForm){
+
+        // get address and project
+        Address address = projectRegistrationForm.getAddress();
+        Project project = projectRegistrationForm.getProject();
+        project.setProjectAddress(address);
+        project.setActive(true);
+
+        // search with query by example based on String criteria
+        List<Project> projects = projectsService.findAllExample(project);
+
+        // getting rid of projects not matching number criteria
+        if (project.getProjectMinInv() != null){
+            projects.removeIf(p -> p.getProjectMinInv().compareTo(project.getProjectMinInv()) == 1);
+        }
+
+        if (project.getProjectExpectedRaise() != null){
+            projects.removeIf(p -> p.getProjectExpectedRaise().compareTo(project.getProjectExpectedRaise()) == -1);
+        }
+
+        if (project.getProjectReturn() != 0.0) {
+            projects.removeIf(p -> p.getProjectReturn() < project.getProjectReturn());
+        }
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("projectSearchResult");
+        modelAndView.addObject("projects", projects);
+        return modelAndView;
+    }
+
 
 /*
     @PostConstruct
