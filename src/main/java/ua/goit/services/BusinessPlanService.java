@@ -2,6 +2,8 @@ package ua.goit.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.dao.BusinessPlanDao;
@@ -51,6 +53,27 @@ public class BusinessPlanService {
     @Transactional
     public void delete(BusinessPlan entity) {
         dao.delete(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<BusinessPlan> findAllExample (BusinessPlan businessPlan) {
+
+        if (businessPlan.getAddress().getTown().isEmpty()) {
+            businessPlan.getAddress().setTown(null);
+        }
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withIgnoreNullValues()
+                .withIgnoreCase()
+                .withIgnorePaths("businessplan_id", "projectId", "projects", "address.addressId", "businessPlanLastChange", "isActive")
+                .withIgnorePaths("businessPlanExpectedRaise", "businessPlanAmountRaised", "businessPlanMinInv", "businessPlanReturn");
+        //    .withMatcher("projectAmountRaised", IsMoreThan(Long.parseLong()));
+        // ignore numbers, because I did not find how to deal with ExampleMatcher and numbers
+        // I will write my own logic about numbers in the controller, but it is an area of improvement for this code
+
+        Example<BusinessPlan> example = Example.of(businessPlan, matcher);
+
+        return dao.findAll(example);
     }
 
 }

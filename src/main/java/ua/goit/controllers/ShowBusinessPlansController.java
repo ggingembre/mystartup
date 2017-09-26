@@ -111,6 +111,44 @@ public class ShowBusinessPlansController {
         return "businessPlanResult";
     }
 
+    @GetMapping("/search")
+    public String projectSearch(Model model) {
+        model.addAttribute("businessPlanSearch", new BusinessPlanRegistrationForm());
+        //return new ModelAndView("projectRegistration", "command", new Project());
+        return "businessPlanSearch";
+    }
+
+    @PostMapping("/search")
+    public ModelAndView SearchResults(@ModelAttribute BusinessPlanRegistrationForm businessPlanRegistrationForm){
+
+        // get address and business plan
+        Address address = businessPlanRegistrationForm.getAddress();
+        BusinessPlan businessPlan = businessPlanRegistrationForm.getBusinessPlan();
+        businessPlan.setAddress(address);
+        businessPlan.setActive(true);
+
+        // search with query by example based on String criteria
+        List<BusinessPlan> businessPlans = businessPlansService.findAllExample(businessPlan);
+
+        // getting rid of projects not matching number criteria
+        if (businessPlan.getBusinessPlanMinInv() != null){
+            businessPlans.removeIf(p -> p.getBusinessPlanMinInv().compareTo(businessPlan.getBusinessPlanMinInv()) == 1);
+        }
+
+        if (businessPlan.getBusinessPlanExpectedRaise() != null){
+            businessPlans.removeIf(p -> p.getBusinessPlanExpectedRaise().compareTo(businessPlan.getBusinessPlanExpectedRaise()) == -1);
+        }
+
+        if (businessPlan.getBusinessPlanReturn() != 0.0) {
+            businessPlans.removeIf(p -> p.getBusinessPlanReturn() < businessPlan.getBusinessPlanReturn());
+        }
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("businessPlanSearchResult");
+        modelAndView.addObject("businessPlans", businessPlans);
+        return modelAndView;
+    }
+
     /*
     @PostConstruct
     public void initDefaultBusinessPlans() {

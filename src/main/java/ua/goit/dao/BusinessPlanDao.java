@@ -18,4 +18,6 @@ public interface BusinessPlanDao extends JpaRepository<BusinessPlan, Long> {
     List<Project> findByInvSize(long invSize);
     List<Project> findByMinIrr(long minIrr);
     List<Project> findActive();*/
+
+    BusinessPlan findByProjectId(long id);
 }

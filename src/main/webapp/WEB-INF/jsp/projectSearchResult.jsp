@@ -71,13 +71,13 @@
 
 <table>
     <tr>
-        <td class="tb2" style="width:50%"> <a href="javascript:history.go(-1)">Edit your criteria</a> </td>
+        <td class="tb2" style="width:95%"> <a href="javascript:history.go(-1)">Edit your criteria</a> </td>
     </tr>
     <tr>
-        <td class="tb2" style="width:50%"> <a href="/project/search">New Search</a> </td>
+        <td class="tb2" style="width:95%"> <a href="/project/search">New Search</a> </td>
     </tr>
     <tr>
-        <td class="tb2" style="width:50%"> <a href="/project/showAll">Show all projects</a> </td>
+        <td class="tb2" style="width:95%"> <a href="/project/showAll">Show all projects</a> </td>
     </tr>
 </table>
 <br>
