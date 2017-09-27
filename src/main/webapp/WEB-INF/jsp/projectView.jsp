@@ -57,6 +57,14 @@
                 <td>Last Changed :</td>
                 <td>${project.projectLastChange}</td>
             </tr>
+
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="<c:url value="/project/${project.projectId}/delete" />">Delete</a> </td>
+    </tr>
+
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="<c:url value="/project/${project.projectId}/update" />">Edit</a> </td>
+    </tr>
         </table>
 </body>
 </html>

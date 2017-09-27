@@ -101,6 +101,14 @@
                 <td>${businessPlan.businessPlanLastChange}</td>
             </tr>
 
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="<c:url value="/businessplan/${businessPlan.businessplan_id}/delete" />">Delete</a> </td>
+    </tr>
+
+    <tr>
+        <td class="tb2" style="width:50%"> <a href="<c:url value="businessplan/${businessPlan.businessplan_id}/update" />">Edit</a> </td>
+    </tr>
+
         </table>
 </body>
 </html>

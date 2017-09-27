@@ -70,7 +70,7 @@ public class ModelConfiguration {
         return new JpaTransactionManager(entityManagerFactory);
     }
 
-    @Bean
+    /*@Bean
     public DataSourceInitializer dataSourceInitializer(DataSource dataSource){
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(scriptResource);
@@ -79,5 +79,5 @@ public class ModelConfiguration {
         initializer.setDataSource(dataSource);
         initializer.setDatabasePopulator(populator);
         return initializer;
-    }
+    }*/
 }

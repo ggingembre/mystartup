@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.goit.dao.AddressDao;
 import ua.goit.dao.ProjectDao;
 import ua.goit.entity.*;
@@ -72,6 +73,22 @@ public class ShowBusinessPlansController {
         model.addAttribute("businessPlan", businessPlan);
 
         return "businessPlanView";
+    }
+
+    // delete business plan
+    @RequestMapping(value = "/{businessPlanId}/delete", method = RequestMethod.GET)
+    public String deleteBusinessPlan(@PathVariable long businessPlanId){ //, final RedirectAttributes redirectAttributes) {
+
+        //logger.debug("delete Business Plan() : {}", id);
+
+        //BusinessPlan businessPlan = .findByID(businessPlanId);
+        businessPlansService.delete(businessPlanId);
+
+        //redirectAttributes.addFlashAttribute("css", "success");
+        //redirectAttributes.addFlashAttribute("msg", "User is deleted!");
+
+        return "businessPlanDeleted";
+
     }
 
     @GetMapping("/add")

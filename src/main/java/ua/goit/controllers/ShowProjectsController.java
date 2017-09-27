@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.goit.entity.*;
 import ua.goit.services.AddressService;
 import ua.goit.services.ProjectService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
@@ -75,6 +76,21 @@ public class ShowProjectsController {
         modelAndView.setViewName("projectView");
         modelAndView.addObject("project", project);
         return modelAndView;
+    }
+
+    // delete project
+    @RequestMapping(value = "/{projectId}/delete", method = RequestMethod.GET)
+    public String deleteProject(@PathVariable long projectId) { //, final RedirectAttributes redirectAttributes) {
+
+        //logger.debug("deleteProject() : {}", id);
+
+       // projectsService.delete(projectId);
+
+        //redirectAttributes.addFlashAttribute("css", "success");
+        //redirectAttributes.addFlashAttribute("msg", "User is deleted!");
+
+        return "projectDeleted";
+
     }
 
     @GetMapping("/add")
@@ -153,6 +169,20 @@ public class ShowProjectsController {
         modelAndView.addObject("projects", projects);
         return modelAndView;
     }
+
+    // show update form
+    @RequestMapping(value = "/{projectId}/update", method = RequestMethod.GET)
+    public String showUpdateProjectForm(@PathVariable("projectId") long projectId, Model model) {
+
+        //logger.debug("showUpdateProjectForm() : {}", id);
+
+        Project project = projectsService.findById(projectId);
+        model.addAttribute("projectView", project);
+
+        return "projectView"; //"users/userform";
+
+    }
+
 
 
 /*
