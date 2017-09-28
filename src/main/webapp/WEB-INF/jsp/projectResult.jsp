@@ -72,6 +72,8 @@
 <br/>
 
 <a href="/project/add">Submit another project</a>
+<a href="/project/showAll">Show all projects</a>
+<a href="/project/search">Search project</a>
 
 </body>
 </html>

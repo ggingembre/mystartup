@@ -99,44 +99,4 @@ public class ProjectService {
     public void delete(Project entity) {
         dao.delete(entity);
     }
-
-    /*@Transactional
-    public List<Project> getProjects (boolean isActive, double projectReturn, BigDecimal projectMinInv){
-
-        Project project = new Project();
-
-        if(isActive){
-            project.setActive(true);
-        }
-        if(projectReturn!=0.0){
-            project.setProjectReturn(projectReturn);
-        }
-        if(projectMinInv!=null){
-            project.setProjectMinInv(projectMinInv);
-        }
-
-        return findAllExample(project);
-
-        //Session session = sessionFactory.getCurrentSession();
-
-        // Create CriteriaBuilder
-        //CriteriaBuilder builder = session.getCriteriaBuilder();
-
-        // Create CriteriaQuery
-        //CriteriaQuery<YourClass> criteria = builder.createQuery(YourClass.class);
-
-
-        //if(projectLastChange!=null){
-        //    Specification<Project> dateSpec =
-        //}
-        //if(endDate!=null){
-        //    criteria.add(Expression.le("date",endDate));
-        //}
-        //if(volume!=null){
-        //    criteria.add(Expression.ge("volume",volume));
-        //}
-        //criteria.addOrder(Order.asc("date"));
-//
-        //return criteria.list();
-    }*/
 }

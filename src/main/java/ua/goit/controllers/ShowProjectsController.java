@@ -1,8 +1,11 @@
 package ua.goit.controllers;
 
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -16,6 +19,7 @@ import ua.goit.services.ProjectService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -35,6 +39,15 @@ import java.util.stream.Collectors;
 public class ShowProjectsController {
 
     private final ProjectService projectsService;
+
+    // logger is not working
+    private final Logger logger = LoggerFactory.getLogger(ShowProjectsController.class);
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handle(HttpMessageNotReadableException e) {
+        logger.warn("Returning HTTP 400 Bad Request", e);
+    }
 
     @Autowired
     public ShowProjectsController(ProjectService projectsService) {
@@ -84,7 +97,7 @@ public class ShowProjectsController {
 
         //logger.debug("deleteProject() : {}", id);
 
-       // projectsService.delete(projectId);
+       projectsService.delete(projectId);
 
         //redirectAttributes.addFlashAttribute("css", "success");
         //redirectAttributes.addFlashAttribute("msg", "User is deleted!");
@@ -123,7 +136,7 @@ public class ShowProjectsController {
 
         Project project = projectRegistrationForm.getProject();
 
-        System.out.println("User:" + projectRegistrationForm.getUser().getUsername());
+        //System.out.println("User:" + projectRegistrationForm.getUser().getUsername());
 
         project.setProjectAddress(address);
         project.setActive(true);
@@ -171,19 +184,36 @@ public class ShowProjectsController {
     }
 
     // show update form
-    @RequestMapping(value = "/{projectId}/update", method = RequestMethod.GET)
-    public String showUpdateProjectForm(@PathVariable("projectId") long projectId, Model model) {
+    @GetMapping(value = "/{projectId}/update")
+    public ModelAndView showUpdateProjectForm(@PathVariable("projectId") long projectId) {
 
-        //logger.debug("showUpdateProjectForm() : {}", id);
+        logger.debug("showUpdateProjectForm() : {}", projectId);
 
         Project project = projectsService.findById(projectId);
-        model.addAttribute("projectView", project);
+        //model.addAttribute("project", project);
 
-        return "projectView"; //"users/userform";
-
+        return new ModelAndView("projectUpdateForm","command",project); // "projectUpdateForm"; //"users/userform";
     }
 
+    // save updated project
+    @PostMapping(value="/updated")
+    public String updateProject(@ModelAttribute ("project") Project project){
+        System.out.println("i am now trying to save changes...");
+        addressService.save(project.getProjectAddress()); // if I do not do that i get: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance beforeQuery flushing
+        projectsService.save(project);
+        return "projectUpdated";
+    }
 
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+        logger.error("Request: " + req.getRequestURL() + " raised " + ex);
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", ex);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("error");
+        return mav;
+    }
 
 /*
     @PostConstruct

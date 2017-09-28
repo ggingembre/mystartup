@@ -19,16 +19,16 @@ public class ProjectRegistrationForm {
 
     private Project project;
     private Address address;
-    private User user;
+    //private User user;
 
-    @Autowired
-    private ModelConfiguration modelConfiguration;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    UserDetailsServiceImpl userDetailsServiceImpl;
+    //@Autowired
+    //private ModelConfiguration modelConfiguration;
+//
+    //@Autowired
+    //private UserService userService;
+//
+    //@Autowired
+    //UserDetailsServiceImpl userDetailsServiceImpl;
 
     public ProjectRegistrationForm() {
 
@@ -64,11 +64,11 @@ public class ProjectRegistrationForm {
         this.project = project;
     }
 
-    public User getUser() {
-        return user;
-    }
+    //public User getUser() {
+    //    return user;
+    //}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    //public void setUser(User user) {
+    //    this.user = user;
+    //}
 }
