@@ -198,6 +198,8 @@ public class ShowProjectsController {
     // save updated project
     @PostMapping(value="/updated")
     public String updateProject(@ModelAttribute ("project") Project project){
+        project.setActive(true);
+        project.setProjectLastChange(LocalDate.now());
         addressService.save(project.getProjectAddress()); // if I do not do that i get: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance beforeQuery flushing
         projectsService.save(project);
         return "projectUpdated";

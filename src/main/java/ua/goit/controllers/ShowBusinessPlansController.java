@@ -174,6 +174,8 @@ public class ShowBusinessPlansController {
     // save updated business plan
     @PostMapping(value="/updated")
     public String updateProject(@ModelAttribute ("businessPlan") BusinessPlan businessPlan){
+        businessPlan.setActive(true);
+        businessPlan.setBusinessPlanLastChange(LocalDate.now());
         addressService.save(businessPlan.getAddress()); // if I do not do that i get: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance beforeQuery flushing
         businessPlansService.save(businessPlan);
         return "businessPlanUpdated";
