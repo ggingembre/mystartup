@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `businessplans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `businessplans` (
-  `businessplan_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `business_model` varchar(255) DEFAULT NULL,
   `businessplan_amount_raised` decimal(19,2) DEFAULT NULL,
   `businessplan_expected_raise` decimal(19,2) DEFAULT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `businessplans` (
   `usp` varchar(255) DEFAULT NULL,
   `weburl` varchar(255) DEFAULT NULL,
   `address_address_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`businessplan_id`),
+  PRIMARY KEY (`id`),
   KEY `FKi3481kg7m6mu72r6hj01m4opl` (`address_address_id`),
   CONSTRAINT `FKi3481kg7m6mu72r6hj01m4opl` FOREIGN KEY (`address_address_id`) REFERENCES `address` (`address_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -124,7 +124,7 @@ CREATE TABLE `projects_businessplans` (
   PRIMARY KEY (`projects_project_id`,`businessPlans_businessplan_id`),
   KEY `FKsnpkrdpb7f1hsp72jquujftrh` (`businessPlans_businessplan_id`),
   CONSTRAINT `FK6e5uenprs2uj33ca2j73l4jwm` FOREIGN KEY (`projects_project_id`) REFERENCES `projects` (`project_id`),
-  CONSTRAINT `FKsnpkrdpb7f1hsp72jquujftrh` FOREIGN KEY (`businessPlans_businessplan_id`) REFERENCES `businessplans` (`businessplan_id`)
+  CONSTRAINT `FKsnpkrdpb7f1hsp72jquujftrh` FOREIGN KEY (`businessPlans_businessplan_id`) REFERENCES `businessplans` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

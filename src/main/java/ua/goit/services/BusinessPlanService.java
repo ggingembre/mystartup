@@ -46,9 +46,9 @@ public class BusinessPlanService {
     }
 
     @Transactional
-    public void delete(Long s) {
-        BusinessPlan entity = dao.findByBusinessplan_id(s);
-        dao.delete(entity);
+    public void delete(long s) {
+        BusinessPlan entity = dao.findById(s);
+            dao.delete(entity);
     }
 
     @Transactional

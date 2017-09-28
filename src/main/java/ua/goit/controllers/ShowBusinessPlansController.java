@@ -76,7 +76,7 @@ public class ShowBusinessPlansController {
     }
 
     // delete business plan
-    @RequestMapping(value = "/{businessPlanId}/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/{businessPlanId}/delete") //, method = RequestMethod.DELETE)
     public String deleteBusinessPlan(@PathVariable long businessPlanId){ //, final RedirectAttributes redirectAttributes) {
 
         //logger.debug("delete Business Plan() : {}", id);

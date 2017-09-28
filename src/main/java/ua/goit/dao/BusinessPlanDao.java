@@ -1,6 +1,7 @@
 package ua.goit.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.goit.entity.BusinessPlan;
@@ -10,6 +11,7 @@ import ua.goit.entity.BusinessPlan;
  * Created by Guillaume Gingembre on 15/09/2017.
  */
 
+@EnableJpaRepositories(basePackages = "com.acme.repositories.jpa")
 public interface BusinessPlanDao extends JpaRepository<BusinessPlan, Long> {
 
         /*Project findByName(String name);
@@ -19,5 +21,6 @@ public interface BusinessPlanDao extends JpaRepository<BusinessPlan, Long> {
     List<Project> findByMinIrr(long minIrr);
     List<Project> findActive();*/
 
-    BusinessPlan findByBusinessplan_id(long businessplan_id);
+    BusinessPlan findById(long id);
+
 }

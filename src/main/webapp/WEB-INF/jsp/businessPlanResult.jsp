@@ -17,7 +17,7 @@
     <table>
             <tr>
                 <td>Business Plan Id :</td>
-                <td>${businessPlanRegistrationForm.businessPlan.businessplan_id}</td>
+                <td>${businessPlanRegistrationForm.businessPlan.id}</td>
             </tr>
             <tr>
                 <td>Idea :</td>

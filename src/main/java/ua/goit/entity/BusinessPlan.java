@@ -5,10 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  * Created by Guillaume Gingembre on 14/09/2017.
@@ -23,13 +20,13 @@ public class BusinessPlan {
     //Переименовать все поля согласно тому что сказал андрей и егор
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "businessplan_id", updatable=false, nullable=false)
-    private long businessplan_id;
+    @Column(name = "id", updatable=false, nullable=false)
+    private long id;
 
     @Column(name = "project_id")
     private long projectId;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
     private Address address;
 
     @Column(name = "idea")
@@ -134,12 +131,12 @@ public class BusinessPlan {
         this.isActive = isActive;
     }
 
-    public long getBusinessplan_id() {
-        return businessplan_id;
+    public long getId() {
+        return id;
     }
 
-    public void setBusinessplan_id(long businessplan_id) {
-        this.businessplan_id = businessplan_id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getProjectId() {
@@ -347,7 +344,7 @@ public class BusinessPlan {
     @Override
     public String toString() {
         return "BusinessPlan{" +
-                "businessplan_id=" + businessplan_id +
+                "id=" + id +
                 ", projectId=" + projectId +
                 ", address=" + address +
                 ", idea='" + idea + '\'' +

@@ -61,7 +61,7 @@
                             <td class="tb1" style="width:60%">${businessPlan.businessPlanLastChange}</td>
                         </tr>
                 <tr>
-                    <td class="tb2" style="width:50%"> <a href="/businessplan/${businessPlan.businessplan_id}">Show Business Plan</a> </td>
+                    <td class="tb2" style="width:50%"> <a href="/businessplan/${businessPlan.id}">Show Business Plan</a> </td>
                 </tr>
             </div>
                 </table>
