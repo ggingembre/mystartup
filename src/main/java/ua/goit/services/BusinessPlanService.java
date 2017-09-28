@@ -36,6 +36,11 @@ public class BusinessPlanService {
     }
 
     @Transactional(readOnly = true)
+    public BusinessPlan findById (Long s) {
+        return dao.findById(s);
+    }
+
+    @Transactional(readOnly = true)
     public BusinessPlan findOne(Long s) {
         return dao.findOne(s);
     }

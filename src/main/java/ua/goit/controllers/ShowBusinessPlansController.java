@@ -2,6 +2,8 @@ package ua.goit.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import ua.goit.services.BusinessPlanService;
 import ua.goit.services.ProjectService;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +38,8 @@ import java.util.stream.Collectors;
 public class ShowBusinessPlansController {
 
     private final BusinessPlanService businessPlansService;
+
+    private final Logger logger = LoggerFactory.getLogger(ShowProjectsController.class);
 
     @Autowired
     public ShowBusinessPlansController(BusinessPlanService businessPlansService) {
@@ -57,8 +62,6 @@ public class ShowBusinessPlansController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/showAll")
     public ModelAndView showBusinessPlans() {
-        //List<String> businessPlanNames =
-          //      businessPlansService.findAll().stream().map(BusinessPlan::toString).collect(Collectors.toList());
         List<BusinessPlan> businessPlans = businessPlansService.findAll();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("businessPlans");
@@ -76,12 +79,11 @@ public class ShowBusinessPlansController {
     }
 
     // delete business plan
-    @RequestMapping(value = "/{businessPlanId}/delete") //, method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{businessPlanId}/delete")
     public String deleteBusinessPlan(@PathVariable long businessPlanId){ //, final RedirectAttributes redirectAttributes) {
 
         //logger.debug("delete Business Plan() : {}", id);
 
-        //BusinessPlan businessPlan = .findByID(businessPlanId);
         businessPlansService.delete(businessPlanId);
 
         //redirectAttributes.addFlashAttribute("css", "success");
@@ -94,7 +96,6 @@ public class ShowBusinessPlansController {
     @GetMapping("/add")
     public String businessPlanForm(Model model) {
         model.addAttribute("businessPlanRegistration", new BusinessPlanRegistrationForm());
-        //model.addAttribute("businessPlanRegistration", new Address());
         return "businessPlanRegistration";
     }
 
@@ -103,13 +104,6 @@ public class ShowBusinessPlansController {
 
         // saving address
         Address address = businessPlanRegistrationForm.getAddress();
-
-        // here, if I do address = businessPlanRegistrationForm.getAddress(), it does not work
-
-        //address.setAddressId(businessPlanRegistrationForm.getAddress().getAddressId());
-        //address.setCountry(businessPlanRegistrationForm.getAddress().getCountry());
-        //address.setRegion(businessPlanRegistrationForm.getAddress().getRegion());
-        //address.setTown(businessPlanRegistrationForm.getAddress().getTown());
 
         addressService.save(address);
 
@@ -131,7 +125,6 @@ public class ShowBusinessPlansController {
     @GetMapping("/search")
     public String projectSearch(Model model) {
         model.addAttribute("businessPlanSearch", new BusinessPlanRegistrationForm());
-        //return new ModelAndView("projectRegistration", "command", new Project());
         return "businessPlanSearch";
     }
 
@@ -164,6 +157,37 @@ public class ShowBusinessPlansController {
         modelAndView.setViewName("businessPlanSearchResult");
         modelAndView.addObject("businessPlans", businessPlans);
         return modelAndView;
+    }
+
+    // show update form
+    @GetMapping(value = "/{businessPlanId}/update")
+    public ModelAndView showUpdateProjectForm(@PathVariable("businessPlanId") long businessPlanId) {
+
+        logger.debug("showUpdateProjectForm() : {}", businessPlanId);
+
+        BusinessPlan businessPlan = businessPlansService.findById(businessPlanId);
+
+
+        return new ModelAndView("businessPlanUpdateForm","command",businessPlan);
+    }
+
+    // save updated business plan
+    @PostMapping(value="/updated")
+    public String updateProject(@ModelAttribute ("businessPlan") BusinessPlan businessPlan){
+        addressService.save(businessPlan.getAddress()); // if I do not do that i get: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance beforeQuery flushing
+        businessPlansService.save(businessPlan);
+        return "businessPlanUpdated";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+        logger.error("Request: " + req.getRequestURL() + " raised " + ex);
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", ex);
+        mav.addObject("url", req.getRequestURL());
+        mav.setViewName("error");
+        return mav;
     }
 
     /*

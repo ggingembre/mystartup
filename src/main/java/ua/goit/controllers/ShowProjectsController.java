@@ -40,14 +40,14 @@ public class ShowProjectsController {
 
     private final ProjectService projectsService;
 
-    // logger is not working
     private final Logger logger = LoggerFactory.getLogger(ShowProjectsController.class);
 
+    /*
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handle(HttpMessageNotReadableException e) {
         logger.warn("Returning HTTP 400 Bad Request", e);
-    }
+    } */
 
     @Autowired
     public ShowProjectsController(ProjectService projectsService) {
@@ -198,7 +198,6 @@ public class ShowProjectsController {
     // save updated project
     @PostMapping(value="/updated")
     public String updateProject(@ModelAttribute ("project") Project project){
-        System.out.println("i am now trying to save changes...");
         addressService.save(project.getProjectAddress()); // if I do not do that i get: org.hibernate.TransientPropertyValueException: object references an unsaved transient instance - save the transient instance beforeQuery flushing
         projectsService.save(project);
         return "projectUpdated";
