@@ -71,7 +71,7 @@ public class BusinessPlanService {
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withIgnoreNullValues()
                 .withIgnoreCase()
-                .withIgnorePaths("businessplan_id", "projectId", "projects", "address.addressId", "businessPlanLastChange", "isActive")
+                .withIgnorePaths("id", "projectId", "projects", "address.addressId", "businessPlanLastChange", "isActive")
                 .withIgnorePaths("businessPlanExpectedRaise", "businessPlanAmountRaised", "businessPlanMinInv", "businessPlanReturn");
         //    .withMatcher("projectAmountRaised", IsMoreThan(Long.parseLong()));
         // ignore numbers, because I did not find how to deal with ExampleMatcher and numbers

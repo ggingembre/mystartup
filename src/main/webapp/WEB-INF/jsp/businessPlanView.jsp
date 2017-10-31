@@ -106,7 +106,7 @@
     </tr>
 
     <tr>
-        <td class="tb2" style="width:50%"> <a href="<c:url value="businessplan/${businessPlan.id}/update" />">Edit</a> </td>
+        <td class="tb2" style="width:50%"> <a href="<c:url value="/businessplan/${businessPlan.id}/update" />">Edit</a> </td>
     </tr>
 
         </table>

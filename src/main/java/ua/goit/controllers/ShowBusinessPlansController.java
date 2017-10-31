@@ -162,11 +162,9 @@ public class ShowBusinessPlansController {
     // show update form
     @GetMapping(value = "/{businessPlanId}/update")
     public ModelAndView showUpdateProjectForm(@PathVariable("businessPlanId") long businessPlanId) {
-
         logger.debug("showUpdateProjectForm() : {}", businessPlanId);
 
         BusinessPlan businessPlan = businessPlansService.findById(businessPlanId);
-
 
         return new ModelAndView("businessPlanUpdateForm","command",businessPlan);
     }
